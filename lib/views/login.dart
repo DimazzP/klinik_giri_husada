@@ -1,9 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:klinik_giri_husada/helpers/colorThemes.dart';
+import '../helpers/colorThemes.dart';
 import '../helpers/FontSize.dart';
 import '../widgets/TextHelper.dart';
 import '../widgets/TextResponsive.dart';
