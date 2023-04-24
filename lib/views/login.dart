@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:klinik_giri_husada/helpers/colorThemes.dart';
+import '../helpers/FontSize.dart';
+import '../widgets/TextHelper.dart';
+import '../widgets/TextResponsive.dart';
 
 import '../controllers/LoginController.dart';
 
@@ -22,76 +26,56 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final myAppbar = AppBar(
-      elevation: 0,
-      backgroundColor: Color(0xfff1f1f1),
-      title: Container(
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("assets/images/logodinas.png"),
-            Container(
-              margin: EdgeInsets.only(left: 6, right: 6),
-              child: Text(
-                "Klinik Giri Husada",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-            ),
-            Image.asset("assets/images/logopuskesmas.png"),
-          ],
-        ),
-      ),
-    );
-
-    final heighMedia =
-        MediaQuery.of(context).size.height - myAppbar.preferredSize.height;
+    final heighMedia = MediaQuery.of(context).size.height;
     final int paddingMedia = 12;
+    var headmedium = Theme.of(context).textTheme.displayMedium;
+    final FittedFont fittedFont = new FittedFont(context);
+    final inColor = AppColors();
 
-    // double height = appBar.preferredSize.height;
+    String _deviceName = '';
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xfff1f1f1),
-      appBar: myAppbar,
       body: Form(
         key: _formKey,
         child: Container(
-          margin: EdgeInsets.only(left: 12, right: 12),
+          margin: MediaQuery.of(context).padding,
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
               children: [
                 Container(
                   alignment: Alignment.center,
-                  height: heighMedia * 0.13,
+                  height: heighMedia * 0.15,
                   child: Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffd9d9d9),
-                    ),
-                    child: AutoSizeText(
-                      "Aplikasi Pendaftaran Pasien\nKlinik Giri Husada",
-                      style: Theme.of(context).textTheme.displayMedium,
-                      // style: TextStyle(fontSize: 16),
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xffd9d9d9),
+                      ),
+                      child: TextHelper(
+                        text: "Aplikasi Pendaftaran Pasien\nKlinik Giri Husada",
+                        fontSize: fittedFont.small,
+                        textAlign: TextAlign.center,
+                      )),
+                ),
+                SizedBox(
+                  height: heighMedia * 0.025,
                 ),
                 Container(
-                  height: heighMedia * 0.21,
+                  height: heighMedia * 0.2,
                   alignment: Alignment.center,
                   child: Image.asset(
                     "assets/images/ilustrasi.png",
                   ),
                 ),
-                Container(
-                  height: heighMedia * 0.02,
+                SizedBox(
+                  height: heighMedia * 0.015,
                 ),
                 Container(
-                    height: heighMedia * 0.29,
+                    height: heighMedia * 0.3,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -99,7 +83,7 @@ class _LoginState extends State<Login> {
                           alignment: Alignment.center,
                           child: TextFormField(
                             controller: tNowa,
-                            style: TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: fittedFont.small),
                             // showCursor: false,
                             validator: (value) {
                               if (value.toString().isEmpty) {
@@ -126,7 +110,7 @@ class _LoginState extends State<Login> {
                           alignment: Alignment.center,
                           child: TextFormField(
                             obscureText: controller.getObscure,
-                            style: TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: fittedFont.medium),
                             // showCursor: false,
                             controller: tSandi,
                             validator: (value) {
@@ -161,41 +145,40 @@ class _LoginState extends State<Login> {
                       ],
                     )),
                 Container(
-                  height: heighMedia * 0.1,
+                  height: heighMedia * 0.11,
                   alignment: Alignment.center,
                   child: Container(
-                    height: 44,
+                    height: heighMedia * 0.07,
+                    constraints: BoxConstraints(maxHeight: 60),
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            controller.btLogin(
-                                context, tNowa.text, tSandi.text);
-                          }
-                        },
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ))),
-                        child: AutoSizeText(
-                          "Masuk",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        )),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          controller.btLogin(context, tNowa.text, tSandi.text);
+                        }
+                      },
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ))),
+                      child: TextHelper(
+                        text: "Masuk",
+                        fontSize: fittedFont.medium,
+                        fontFamily: 'nunito-b',
+                        fontColor: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
                 Container(
                   alignment: Alignment.center,
                   height: heighMedia * 0.05,
                   child: Center(
-                      child: Text(
-                    "Lupa Kata Sandi?",
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                    ),
+                      child: TextHelper(
+                    text: "Lupa Kata Sandi?",
+                    fontSize: fittedFont.extraSmall,
+                    fontColor: inColor.cgrey,
                   )),
                 ),
                 Container(
@@ -204,28 +187,35 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          "Belum Punya Akun? ",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        TextHelper(
+                          text: "Belum punya akun?",
+                          fontSize: fittedFont.small,
+                          fontFamily: 'nunito-b',
                         ),
                         TextButton(
-                          onPressed: () {
-                            setState(() {
-                              Navigator.of(context).pushNamed('/register');
-                            });
-                          },
-                          style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              alignment: Alignment.centerLeft),
-                          child: Text(
-                            "Daftar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                        )
+                            onPressed: () {
+                              setState(() {
+                                Navigator.of(context).pushNamed('/register');
+                              });
+                            },
+                            style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                alignment: Alignment.centerLeft),
+                            child: TextHelper(
+                              text: " Daftar",
+                              fontFamily: 'nunito-b',
+                              fontSize: fittedFont.small,
+                              textDecoration: TextDecoration.underline,
+                            )
+                            //  Text(
+                            //   "Daftar",
+                            //   style: TextStyle(
+                            //     fontWeight: FontWeight.bold,
+                            //     color: Theme.of(context).colorScheme.primary,
+                            //   ),
+                            // ),
+                            )
                       ]),
                 )
               ],
