@@ -1,4 +1,7 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:klinik_giri_husada/helpers/DeviceInfo.dart';
+import 'package:klinik_giri_husada/models/UserModel.dart';
 import '../helpers/OkDialog.dart';
 import '../models/PatientModel.dart';
 
@@ -12,14 +15,15 @@ class LoginController {
     _obscure = !_obscure;
   }
 
-  void btLogin(BuildContext context, String nowa, String sandi) {
-    Navigator.pushNamed(context, '/bottom_view');
-    PatientModel.loginPasien(nowa, sandi).then((value) {
-      if (value.kode == 1) {
-        Navigator.pushNamed(context, '/bottom_view');
+  void btLogin(BuildContext context, String nowa, String sandi) async {
+    String device_name = await DeviceInfo.getInfo(context);
+    UserModel.login(nowa, sandi, device_name).then((value) {
+      // new OkDialog(context, value.status.toString(), value.message.toString());
+
+      if (value.status! > 399) {
+        new OkDialog(context, value.title.toString(), value.message.toString());
       } else {
-        final myDialog;
-        myDialog = new OkDialog(context, 'Gagal Masuk', value.pesan.toString());
+        Navigator.pushNamed(context, '/bottom_view');
       }
     });
   }
