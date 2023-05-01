@@ -11,6 +11,8 @@ class TextHelper extends StatelessWidget {
     this.fontColor,
     this.textAlign,
     this.textDecoration,
+    this.maxLines,
+    this.overflow,
     Key? key,
   }) : super(key: key);
 
@@ -21,17 +23,21 @@ class TextHelper extends StatelessWidget {
   Color? fontColor = Color(0xff282828);
   String? fontFamily = "nunito-m";
   final TextDecoration? textDecoration;
+  var maxLines = null;
+  TextOverflow? overflow = null;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       textAlign: textAlign,
+      maxLines: maxLines,
       style: TextStyle(
         fontSize: fontSize,
         fontFamily: fontFamily,
         fontWeight: fontWeight,
         color: fontColor,
+        overflow: overflow,
         decoration: textDecoration,
         // color: fontColor,
       ),

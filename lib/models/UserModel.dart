@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:klinik_giri_husada/models/ErrorResponse.dart';
-
 import '../helpers/ApiHelper.dart';
 import 'package:http/http.dart' as http;
 
@@ -58,6 +56,14 @@ class UserResponse {
       profile: ProfileResponse.fromJson(json['profile']),
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'user_id': user_id,
+      'user_nowa': user_nowa,
+      'user_idkategori': user_idkategori,
+      'profile': profile
+    };
+  }
 }
 
 class ProfileResponse {
@@ -80,5 +86,14 @@ class ProfileResponse {
       pasien_foto: json['pasien_foto'],
       pasien_alamat: json['pasien_alamat'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'pasien_id': pasien_id,
+      'pasien_nama': pasien_nama,
+      'pasien_foto': pasien_foto,
+      'pasien_alamat': pasien_alamat,
+    };
   }
 }

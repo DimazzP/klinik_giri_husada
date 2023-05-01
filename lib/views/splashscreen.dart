@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 import '../helpers/colorThemes.dart';
-import '../widgets/TextResponsive.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -38,16 +38,16 @@ class _SplashscreenState extends State<Splashscreen> {
                 width: widthMedia * 0.6,
               ),
             ),
-            FittedText(
+            TextHelper(
               text: "Aplikasi Pendaftaran Pasien",
               fontSize: 0.06,
               fontFamily: 'nunito-b',
             ),
-            FittedText(
+            TextHelper(
               text: "Daftarkan diri anda dengan mudah",
               fontSize: 0.04,
               fontFamily: 'nunito-b',
-              fontColor: appColors.cgrey,
+              fontColor: AppColors.grey,
             ),
           ],
         ),

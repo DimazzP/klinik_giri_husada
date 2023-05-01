@@ -36,7 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   flutter_secure_storage: ^8.0.0
-  device_info_plus: ^8.2.1
+  flutter_screenutil: ^5.7.0
+  # device_info_plus: ^8.2.1
 
 dev_dependencies:
   flutter_test:
@@ -90,16 +91,19 @@ flutter:
   fonts:
     - family: nunito-r
       fonts:
-        - asset: assets/fonts/nunito-r.ttf
+        - asset: assets/fonts/nunito-regular.ttf
     #       - asset: fonts/Schyler-Italic.ttf
     #         style: italic
     - family: nunito-m
       fonts:
-        - asset: assets/fonts/nunito-m.ttf
+        - asset: assets/fonts/nunito-medium.ttf
     #       - asset: fonts/TrajanPro_Bold.ttf
     #         weight: 700
+    - family: nunito-sm
+      fonts:
+        - asset: assets/fonts/nunito-semibold.ttf
     - family: nunito-b
       fonts:
-        - asset: assets/fonts/nunito-b.ttf
+        - asset: assets/fonts/nunito-bold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

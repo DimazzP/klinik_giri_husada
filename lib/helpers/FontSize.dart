@@ -7,7 +7,7 @@ class FittedFont {
   double? large;
   double? extraLarge;
   FittedFont(BuildContext context) {
-    if (MediaQuery.of(context).size.width <= 800) {
+    if (MediaQuery.of(context).size.width <= 640) {
       extraSmall = 12;
       small = 14;
       medium = 16;

@@ -1,11 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../helpers/FontFamily.dart';
 import '../helpers/colorThemes.dart';
 import '../helpers/FontSize.dart';
 import '../widgets/TextHelper.dart';
-import '../widgets/TextResponsive.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../controllers/LoginController.dart';
 
@@ -29,196 +32,207 @@ class _LoginState extends State<Login> {
     final int paddingMedia = 12;
     var headmedium = Theme.of(context).textTheme.displayMedium;
     final FittedFont fittedFont = new FittedFont(context);
-    final inColor = AppColors();
 
     String _deviceName = '';
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xfff1f1f1),
-      body: Form(
-        key: _formKey,
-        child: Container(
-          margin: MediaQuery.of(context).padding,
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: heighMedia * 0.15,
-                  child: Container(
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Color(0xffd9d9d9),
-                      ),
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              //! header
+              Container(
+                height: 172.h,
+                width: 375.w,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(40.r),
+                            bottomRight: Radius.circular(40.r)),
+                        child: Container(
+                          color: Colors.white,
+                          height: 137.h,
+                        )),
+                    Container(
+                      padding: EdgeInsets.only(top: 41.h),
+                      width: double.infinity,
+                      alignment: Alignment.topCenter,
                       child: TextHelper(
-                        text: "Aplikasi Pendaftaran Pasien\nKlinik Giri Husada",
-                        fontSize: fittedFont.small,
-                        textAlign: TextAlign.center,
-                      )),
+                        text: "Klinik Giri Husada",
+                        fontSize: 28.sp,
+                        fontFamily: FontFamily.bold,
+                      ),
+                    ),
+                    Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: Container(
+                              width: 257.h,
+                              height: 61.h,
+                              alignment: Alignment.center,
+                              color: AppColors.grey2,
+                              child: TextHelper(
+                                text: "Aplikasi Pendaftaran Pasien\nOnline",
+                                fontSize: 16.sp,
+                                fontFamily: FontFamily.bold,
+                                textAlign: TextAlign.center,
+                                fontColor: AppColors.black,
+                              ),
+                            ))),
+                  ],
                 ),
-                SizedBox(
-                  height: heighMedia * 0.025,
-                ),
-                Container(
-                  height: heighMedia * 0.2,
-                  alignment: Alignment.center,
+              ),
+              SizedBox(height: 50.h),
+              Expanded(
+                child: Container(
                   child: Image.asset(
                     "assets/images/ilustrasi.png",
                   ),
                 ),
-                SizedBox(
-                  height: heighMedia * 0.015,
+              ),
+              SizedBox(height: 25.h),
+              //! input field
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                child: TextFormField(
+                  controller: tNowa,
+                  style: TextStyle(fontSize: 18.sp, color: AppColors.black),
+                  // showCursor: false,
+                  validator: (value) {
+                    if (value.toString().isEmpty) {
+                      return "Masukkan Nomor Anda";
+                    }
+                  },
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(13),
+                  ],
+                  decoration: InputDecoration(
+                      hintText: "Nomor Telepon",
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 16.h),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14.r),
+                        borderSide: BorderSide.none,
+                      ),
+                      suffixIcon: Icon(Icons.phone)),
                 ),
-                Container(
-                    height: heighMedia * 0.3,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          child: TextFormField(
-                            controller: tNowa,
-                            style: TextStyle(fontSize: fittedFont.small),
-                            // showCursor: false,
-                            validator: (value) {
-                              if (value.toString().isEmpty) {
-                                return "Masukkan Nomor Anda";
-                              }
-                            },
-                            keyboardType: TextInputType.phone,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(13),
-                            ],
-                            decoration: InputDecoration(
-                                hintText: "Nomor Telepon",
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(14),
-                                  borderSide: BorderSide.none,
-                                ),
-                                suffixIcon: Icon(Icons.phone)),
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: TextFormField(
-                            obscureText: controller.getObscure,
-                            style: TextStyle(fontSize: fittedFont.medium),
-                            // showCursor: false,
-                            controller: tSandi,
-                            validator: (value) {
-                              if (value.toString().isEmpty) {
-                                return "Masukkan Kata Sandi";
-                              }
-                            },
-                            decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: "Kata Sandi",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(14),
-                                  borderSide: BorderSide.none),
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    controller.toglePass();
-                                  });
-                                },
-                                child: controller.getObscure
-                                    ? const Icon(
-                                        Icons.visibility_off,
-                                      )
-                                    : const Icon(
-                                        Icons.visibility,
-                                      ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-                Container(
-                  height: heighMedia * 0.11,
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: heighMedia * 0.07,
-                    constraints: BoxConstraints(maxHeight: 60),
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          controller.btLogin(context, tNowa.text, tSandi.text);
-                        }
+              ),
+              SizedBox(height: 15.h),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                child: TextFormField(
+                  obscureText: controller.getObscure,
+                  style: TextStyle(fontSize: 18.sp, color: AppColors.black),
+                  // showCursor: false,
+                  controller: tSandi,
+                  validator: (value) {
+                    if (value.toString().isEmpty) {
+                      return "Masukkan Kata Sandi";
+                    }
+                  },
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: "Kata Sandi",
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14.r),
+                        borderSide: BorderSide.none),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          controller.toglePass();
+                        });
                       },
-                      style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ))),
+                      child: controller.getObscure
+                          ? const Icon(
+                              Icons.visibility_off,
+                            )
+                          : const Icon(
+                              Icons.visibility,
+                            ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 32.h),
+              //! button
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        controller.btLogin(context, tNowa.text, tSandi.text);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary),
+                    // style: ButtonStyle(
+                    //     backgroundColor: Colors.black,
+                    //     shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(16.r),
+                    //     ))),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 14.sp),
                       child: TextHelper(
                         text: "Masuk",
-                        fontSize: fittedFont.medium,
-                        fontFamily: 'nunito-b',
+                        fontSize: 20.sp,
+                        fontFamily: FontFamily.medium,
                         fontColor: Colors.white,
                       ),
                     ),
                   ),
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  height: heighMedia * 0.05,
-                  child: Center(
-                      child: TextHelper(
+              ),
+              SizedBox(height: 8.h),
+              Container(
+                child: TextButton(
+                  onPressed: () {},
+                  child: TextHelper(
                     text: "Lupa Kata Sandi?",
-                    fontSize: fittedFont.extraSmall,
-                    fontColor: inColor.cgrey,
-                  )),
+                    fontSize: 16.sp,
+                    fontFamily: FontFamily.medium,
+                    fontColor: AppColors.grey,
+                  ),
                 ),
-                Container(
-                  height: heighMedia * 0.05,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        TextHelper(
-                          text: "Belum punya akun?",
-                          fontSize: fittedFont.small,
-                          fontFamily: 'nunito-b',
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.of(context).pushNamed('/register');
-                              });
-                            },
-                            style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                alignment: Alignment.centerLeft),
-                            child: TextHelper(
-                              text: " Daftar",
-                              fontFamily: 'nunito-b',
-                              fontSize: fittedFont.small,
-                              textDecoration: TextDecoration.underline,
-                            )
-                            //  Text(
-                            //   "Daftar",
-                            //   style: TextStyle(
-                            //     fontWeight: FontWeight.bold,
-                            //     color: Theme.of(context).colorScheme.primary,
-                            //   ),
-                            // ),
-                            )
-                      ]),
-                )
-              ],
-            ),
+              ),
+              SizedBox(height: 58.h),
+              Container(
+                padding: EdgeInsets.only(bottom: 16.h),
+                child: RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                      text: "Belum Punya Akun? ",
+                      style: TextStyle(
+                          color: AppColors.black,
+                          fontFamily: FontFamily.medium,
+                          fontSize: 16.sp)),
+                  TextSpan(
+                      text: "Daftar",
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          controller.btRegister(context);
+                        },
+                      style: TextStyle(
+                          color: AppColors.primary,
+                          fontFamily: FontFamily.bold,
+                          decoration: TextDecoration.underline))
+                ])),
+              )
+            ],
           ),
         ),
       ),
