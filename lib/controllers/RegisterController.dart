@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:klinik_giri_husada/models/UserModel.dart';
 
 import '../helpers/OkDialog.dart';
 import '../models/PatientModel.dart';
@@ -25,23 +29,36 @@ class RegisterController {
     obscure2 = !obscure2;
   }
 
-  void btRegister(BuildContext context, String nama, String ktp, String nowa,
-      String alamat, String sandi, String konfirm) {
-    final OkDialog okDialog;
-
-    if (sandi != konfirm) {
-      okDialog = new OkDialog(context, 'Konfirmasi Kata Sandi',
+  void btRegister(
+    BuildContext context,
+    String nowa,
+    String sandi,
+    String nama,
+    String nik,
+    String gender,
+    String alamat,
+    String konfirm,
+  ) {
+    // String device_name = await DeviceInfo.getInfo(context);
+    if (sandi.toString().length < 8) {
+      new OkDialog(context, "Kata Sandi Terlalu Pendek",
+          "Masukkan kata sandi paling sedikit 8 karakter.");
+    } else if (sandi != konfirm) {
+      new OkDialog(context, 'Konfirmasi Kata Sandi',
           'Konfirmasi kata sandi yang anda masukkan tidak sesuai.');
     } else if (_isChecked == false) {
-      okDialog = new OkDialog(context, 'Centang Persetujuan',
+      new OkDialog(context, 'Centang Persetujuan',
           'Klik centang jika anda menyetujui peraturan pada aplikasi ini.');
     } else {
-      PatientModel.registerPasien(nama, ktp, nowa, sandi).then((value) {
-        if (value.kode == 1) {
-          Navigator.pushNamed(context, '/bottom_view');
+      UserModel.register(nowa, sandi, 'mobile', nama, nik, gender, alamat)
+          .then((value) async {
+        if (value.status! >= 400) {
+          OkDialog(context, value.title.toString(), value.message.toString());
         } else {
-          OkDialog(context, "Error",
-              "Gagal mendaftarkan akun anda. Mohon pastikan bahwa data yang anda masukkan benar dan koneksi internet anda lancar.");
+          final storage = new FlutterSecureStorage();
+          String jsonString = json.encode(value.data!.toJson());
+          await storage.write(key: 'userdata', value: jsonString);
+          Navigator.pushNamed(context, '/home');
         }
       });
     }

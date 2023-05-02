@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../helpers/colorThemes.dart';
 import '../widgets/AppbarWidget.dart';
 
@@ -32,36 +32,30 @@ class _QueuePageState extends State<QueuePage> {
 
   @override
   Widget build(BuildContext context) {
-    final myAppbar =
-        AppbarWidget(context: context, titleText: "Daftar Pelayanan");
-    final appbarHeight = myAppbar.preferredSize.height;
-    final heightMedia = MediaQuery.of(context).size.height - appbarHeight;
-    final incolor = AppColors();
     return Scaffold(
-      // appBar: AppbarWidget(headText: 'test'),
-      appBar: myAppbar,
+      appBar: AppbarWidget(
+        context: context,
+        titleText: 'Mendaftarkan Antrian',
+      ),
+      // appBar: AppbarWidget(context: context, titleText: "Daftar Pelayanan"),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: heightMedia * 0.025),
-                height: heightMedia * 0.3,
-                alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/images/gbdokter.png',
-                  // height: 120,
-                ),
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/images/gbdokter.png',
+                height: 200.h,
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                // height: heightMedia * 0.53,
-                color: Colors.amber,
-                child: Text('test'),
-              )
-            ],
-          ),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              // height: heightMedia * 0.53,
+              color: Colors.amber,
+              child: Text('test'),
+            ),
+          ],
         ),
       ),
     );

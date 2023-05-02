@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:klinik_giri_husada/helpers/FontFamily.dart';
+import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 
 class OkDialog {
   OkDialog(BuildContext context, String title, String content) {
@@ -8,11 +11,17 @@ class OkDialog {
         builder: (context) => AlertDialog(
               title: Text(
                 title,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: TextStyle(
+                    fontFamily: FontFamily.semibold,
+                    color: AppColors.grey,
+                    fontSize: 14.sp),
               ),
               content: Text(
                 content,
-                style: Theme.of(context).textTheme.displayMedium,
+                style: TextStyle(
+                    fontFamily: FontFamily.semibold,
+                    color: AppColors.grey,
+                    fontSize: 18.sp),
               ),
               actions: [
                 TextButton(

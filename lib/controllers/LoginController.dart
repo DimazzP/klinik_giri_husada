@@ -2,6 +2,7 @@ import 'dart:convert';
 // import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:klinik_giri_husada/views/home.dart';
 // import '../helpers/DeviceInfo.dart';
 import '../models/UserModel.dart';
 import '../helpers/OkDialog.dart';
@@ -18,7 +19,7 @@ class LoginController {
   }
 
   void btLogin(BuildContext context, String nowa, String sandi) async {
-    Navigator.pushNamed(context, '/bottom_view');
+    Navigator.pushReplacementNamed(context, '/home');
 
     // String device_name = await DeviceInfo.getInfo(context);
     UserModel.login(nowa, sandi, 'android').then((value) async {
@@ -29,12 +30,14 @@ class LoginController {
         String jsonString = json.encode(value.data!.toJson());
         await storage.write(key: 'userdata', value: jsonString);
 
-        Navigator.pushNamed(context, '/bottom_view');
+        Navigator.pushReplacementNamed(context, '/home');
+        // Navigator.pushNamed(context, '/bottom_view');
       }
     });
   }
 
   void btRegister(BuildContext context) {
     Navigator.pushNamed(context, '/register');
+    // Navigator.pushReplacement(context, '/')
   }
 }

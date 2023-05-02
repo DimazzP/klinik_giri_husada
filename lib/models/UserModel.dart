@@ -27,6 +27,22 @@ class UserModel {
     // }
   }
 
+  static Future<UserModel> register(String nowa, String sandi, String device,
+      String nama, String nik, String gender, String alamat) async {
+    Uri url = Uri.parse(Apihelper.url + 'auth/register');
+    var response = await http.post(url, body: {
+      'user_nowa': nowa,
+      'password': sandi,
+      'device_name': device,
+      'pasien_nama': nama,
+      'pasien_nik': nik,
+      'pasien_gender': gender,
+      'pasien_alamat': alamat,
+    });
+    var userData = json.decode(response.body);
+    return UserModel.fromJson(userData);
+  }
+
   static Future<UserModel> login(
       String nowa, String sandi, String device_name) async {
     Uri url = Uri.parse(Apihelper.url + 'auth/login');
@@ -69,12 +85,14 @@ class UserResponse {
 class ProfileResponse {
   final int? pasien_id;
   final String? pasien_nama;
+  final String? pasien_gender;
   final String? pasien_foto;
   final String? pasien_alamat;
 
   const ProfileResponse({
     this.pasien_id,
     this.pasien_nama,
+    this.pasien_gender,
     this.pasien_foto,
     this.pasien_alamat,
   });

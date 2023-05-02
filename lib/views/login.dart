@@ -28,11 +28,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final heighMedia = MediaQuery.of(context).size.height;
-    final int paddingMedia = 12;
-    var headmedium = Theme.of(context).textTheme.displayMedium;
-    final FittedFont fittedFont = new FittedFont(context);
-
     String _deviceName = '';
 
     return Scaffold(
@@ -45,7 +40,7 @@ class _LoginState extends State<Login> {
             children: [
               //! header
               Container(
-                height: 172.h,
+                height: 161.h,
                 width: 375.w,
                 child: Stack(
                   children: [
@@ -58,7 +53,7 @@ class _LoginState extends State<Login> {
                           height: 137.h,
                         )),
                     Container(
-                      padding: EdgeInsets.only(top: 41.h),
+                      padding: EdgeInsets.only(top: 40.h),
                       width: double.infinity,
                       alignment: Alignment.topCenter,
                       child: TextHelper(
@@ -180,17 +175,12 @@ class _LoginState extends State<Login> {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary),
-                    // style: ButtonStyle(
-                    //     backgroundColor: Colors.black,
-                    //     shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(16.r),
-                    //     ))),
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 14.sp),
                       child: TextHelper(
                         text: "Masuk",
                         fontSize: 20.sp,
-                        fontFamily: FontFamily.medium,
+                        fontFamily: FontFamily.semibold,
                         fontColor: Colors.white,
                       ),
                     ),
@@ -219,7 +209,7 @@ class _LoginState extends State<Login> {
                       style: TextStyle(
                           color: AppColors.black,
                           fontFamily: FontFamily.medium,
-                          fontSize: 16.sp)),
+                          fontSize: 18.sp)),
                   TextSpan(
                       text: "Daftar",
                       recognizer: TapGestureRecognizer()
@@ -227,9 +217,11 @@ class _LoginState extends State<Login> {
                           controller.btRegister(context);
                         },
                       style: TextStyle(
-                          color: AppColors.primary,
-                          fontFamily: FontFamily.bold,
-                          decoration: TextDecoration.underline))
+                        fontSize: 18.sp,
+                        color: AppColors.primary,
+                        fontFamily: FontFamily.bold,
+                        decoration: TextDecoration.underline,
+                      ))
                 ])),
               )
             ],

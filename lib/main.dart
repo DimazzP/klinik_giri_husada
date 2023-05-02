@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/helpers/pcolor.dart';
+import 'package:klinik_giri_husada/views/account.dart';
 import 'package:klinik_giri_husada/views/bottom_view.dart';
 import 'package:klinik_giri_husada/views/home.dart';
 import 'package:klinik_giri_husada/views/login.dart';
@@ -19,12 +20,7 @@ void main() {
   runApp(MyApp());
 }
 
-// void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
-  // const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -37,7 +33,9 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-              primaryColor: AppColors.primary, primarySwatch: Palette.pcolor),
+              primaryColor: AppColors.primary,
+              primarySwatch: Palette.pcolor,
+              fontFamily: 'nunito-sm'),
           home: Splashscreen(),
           routes: {
             '/splashscreen': (context) => Splashscreen(),
@@ -46,6 +44,7 @@ class MyApp extends StatelessWidget {
             '/queue': (context) => const QueuePage(),
             '/bottom_view': (context) => const BottomViews(),
             '/register': (context) => const Register(),
+            '/account': (context) => const AccountPage(),
           },
         );
       },
