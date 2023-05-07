@@ -58,7 +58,8 @@ class RegisterController {
           final storage = new FlutterSecureStorage();
           String jsonString = json.encode(value.data!.toJson());
           await storage.write(key: 'userdata', value: jsonString);
-          Navigator.pushNamed(context, '/home');
+          await storage.write(key: 'token', value: value.token);
+          Navigator.pushReplacementNamed(context, '/home');
         }
       });
     }

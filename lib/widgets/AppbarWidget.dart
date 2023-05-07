@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:klinik_giri_husada/helpers/FontFamily.dart';
 
 class AppbarWidget extends AppBar {
   AppbarWidget(
@@ -18,7 +20,8 @@ class AppbarWidget extends AppBar {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   titleText,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style:
+                      TextStyle(fontFamily: FontFamily.bold, fontSize: 18.sp),
                 ),
               ),
             ],

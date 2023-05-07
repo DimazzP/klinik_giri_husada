@@ -31,12 +31,13 @@ class _LoginState extends State<Login> {
     String _deviceName = '';
 
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xfff1f1f1),
       body: SafeArea(
         child: Form(
           key: _formKey,
-          child: Column(
+          child: ListView(
+            shrinkWrap: true,
             children: [
               //! header
               Container(
@@ -83,11 +84,10 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(height: 50.h),
-              Expanded(
-                child: Container(
-                  child: Image.asset(
-                    "assets/images/ilustrasi.png",
-                  ),
+              Container(
+                height: 150.h,
+                child: Image.asset(
+                  "assets/images/ilustrasi.png",
                 ),
               ),
               SizedBox(height: 25.h),
@@ -199,8 +199,9 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              SizedBox(height: 58.h),
+              SizedBox(height: 40.h),
               Container(
+                alignment: Alignment.center,
                 padding: EdgeInsets.only(bottom: 16.h),
                 child: RichText(
                     text: TextSpan(children: [

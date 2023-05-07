@@ -13,8 +13,10 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     var myData = null;
-    if (json['data'] != null) {
+    String? myToken = null;
+    if (json['data'] != null && json['token'] != null) {
       myData = UserResponse.fromJson(json['data']);
+      myToken = json['token'];
     }
 
     return UserModel(
@@ -22,7 +24,7 @@ class UserModel {
       title: json['title'],
       message: json['message'],
       data: myData,
-      token: json['token'] as String?,
+      token: myToken,
     );
     // }
   }

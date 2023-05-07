@@ -114,9 +114,10 @@ class _RegisterState extends State<Register> {
                           ),
                           Row(
                             children: [
-                              Expanded(
+                              Flexible(
                                 child: RadioListTile<String>(
-                                  title: const Text('Laki-laki'),
+                                  title: TextHelper(
+                                      text: "Laki-laki", fontSize: 16.sp),
                                   value: "L",
                                   groupValue: _selectedGender,
                                   onChanged: (String? value) {
@@ -126,9 +127,10 @@ class _RegisterState extends State<Register> {
                                   },
                                 ),
                               ),
-                              Expanded(
+                              Flexible(
                                 child: RadioListTile<String>(
-                                  title: const Text('Perempuan'),
+                                  title: TextHelper(
+                                      text: "Perempuan", fontSize: 16.sp),
                                   value: "P",
                                   groupValue: _selectedGender,
                                   onChanged: (String? value) {
@@ -207,7 +209,7 @@ class _RegisterState extends State<Register> {
                                 )),
                           ),
                         ),
-                        //c7
+                        SizedBox(height: 24.h),
                         Container(
                           child: CheckboxListTile(
                               title: TextHelper(
@@ -226,44 +228,44 @@ class _RegisterState extends State<Register> {
                               }),
                         ),
                         SizedBox(
-                          height: 130.h,
+                          height: 46.h,
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(bottom: 20.h),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (_formKey.currentState!.validate()) {
+                                    controller.btRegister(
+                                        context,
+                                        tNo.text,
+                                        tSandi.text,
+                                        tName.text,
+                                        tNik.text,
+                                        _selectedGender.toString(),
+                                        tAlamat.text,
+                                        tKonfirm.text);
+                                  }
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize:
+                                      Size(double.infinity, double.minPositive),
+                                  padding: EdgeInsets.all(8)),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                child: TextHelper(
+                                  text: "Daftar Akun",
+                                  fontSize: 20.sp,
+                                  fontFamily: FontFamily.semibold,
+                                  fontColor: Colors.white,
+                                ),
+                              )),
+                        ),
+                        SizedBox(
+                          height: 24.h,
                         )
                       ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: 20.h),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              if (_formKey.currentState!.validate()) {
-                                controller.btRegister(
-                                    context,
-                                    tNo.text,
-                                    tSandi.text,
-                                    tName.text,
-                                    tNik.text,
-                                    _selectedGender.toString(),
-                                    tAlamat.text,
-                                    tKonfirm.text);
-                              }
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                              minimumSize:
-                                  Size(double.infinity, double.minPositive),
-                              padding: EdgeInsets.all(8)),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10.h),
-                            child: TextHelper(
-                              text: "Daftar Akun",
-                              fontSize: 20.sp,
-                              fontFamily: FontFamily.semibold,
-                              fontColor: Colors.white,
-                            ),
-                          )),
                     ),
                   ),
                 ],

@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
         title: FutureBuilder<String>(future: () async {
           final storage = new FlutterSecureStorage();
           String? jsonString = await storage.read(key: 'userdata');
+          // String? token = await storage.read(key: 'token');
           UserResponse myObject =
               UserResponse.fromJson(json.decode(jsonString!));
           return myObject.profile!.pasien_nama.toString();
@@ -147,7 +148,8 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/queue');
+                            Navigator.pushNamed(context, '/queue',
+                                arguments: 1);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,

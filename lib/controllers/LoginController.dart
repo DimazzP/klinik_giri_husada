@@ -19,7 +19,7 @@ class LoginController {
   }
 
   void btLogin(BuildContext context, String nowa, String sandi) async {
-    Navigator.pushReplacementNamed(context, '/home');
+    // Navigator.pushReplacementNamed(context, '/home');
 
     // String device_name = await DeviceInfo.getInfo(context);
     UserModel.login(nowa, sandi, 'android').then((value) async {
@@ -28,16 +28,14 @@ class LoginController {
       } else {
         final storage = new FlutterSecureStorage();
         String jsonString = json.encode(value.data!.toJson());
+        await storage.write(key: 'token', value: value.token);
         await storage.write(key: 'userdata', value: jsonString);
-
         Navigator.pushReplacementNamed(context, '/home');
-        // Navigator.pushNamed(context, '/bottom_view');
       }
     });
   }
 
   void btRegister(BuildContext context) {
     Navigator.pushNamed(context, '/register');
-    // Navigator.pushReplacement(context, '/')
   }
 }
