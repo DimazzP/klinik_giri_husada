@@ -3,7 +3,7 @@ import 'package:klinik_giri_husada/helpers/ApiHelper.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:klinik_giri_husada/helpers/OkDialog.dart';
+import 'package:klinik_giri_husada/models/ModelToken.dart';
 
 class DaftarModel {
   final int? status;
@@ -12,14 +12,6 @@ class DaftarModel {
   List<DaftarResponse>? data;
 
   DaftarModel({this.status, this.title, this.message, this.data});
-
-  static Future<Map<String, String>> _getToken() async {
-    final storage = new FlutterSecureStorage();
-    String? jsonString = await storage.read(key: 'token');
-    return {
-      'Authorization': 'Bearer $jsonString',
-    };
-  }
 
   factory DaftarModel.fromJson(Map<String, dynamic> json) {
     List<DaftarResponse> fillData = [];
@@ -36,14 +28,17 @@ class DaftarModel {
 
   static Future<DaftarModel> tambahDaftar(String tanggal, String status,
       String idpasien, String idjenis, String nomor_antrian) async {
+    final Future<Map<String, String>> myToken = ModelToken.getToken();
     Uri url = Uri.parse(Apihelper.url + 'daftar');
-    var response = await http.post(url, headers: await _getToken(), body: {
+    var response =
+        await http.post(url, headers: await ModelToken.getToken(), body: {
       'daftar_tanggal': tanggal,
       'daftar_status': status,
       'daftar_idpasien': idpasien,
       'daftar_idjenis': idjenis,
       'daftar_nomor': nomor_antrian
     });
+
     var body = json.decode(response.body);
 
     return DaftarModel(

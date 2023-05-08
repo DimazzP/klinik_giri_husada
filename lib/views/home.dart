@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
+import 'package:klinik_giri_husada/helpers/OkDialog.dart';
+import 'package:klinik_giri_husada/models/LayananModel.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../helpers/FontSize.dart';
@@ -27,7 +29,6 @@ class _HomePageState extends State<HomePage> {
         title: FutureBuilder<String>(future: () async {
           final storage = new FlutterSecureStorage();
           String? jsonString = await storage.read(key: 'userdata');
-          // String? token = await storage.read(key: 'token');
           UserResponse myObject =
               UserResponse.fromJson(json.decode(jsonString!));
           return myObject.profile!.pasien_nama.toString();
@@ -148,6 +149,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            // LayananModel.getJenis('1', '2023-5-8')
+                            //     .then((value) {
+                            //   new OkDialog(context, value.status.toString(),
+                            //       value.message.toString());
+                            // });
                             Navigator.pushNamed(context, '/queue',
                                 arguments: 1);
                           },
@@ -179,7 +185,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                         //! gigi
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/queue',
+                                arguments: 2);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             elevation: 0,
@@ -208,7 +217,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                         //! ibu & anak
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/queue',
+                                arguments: 3);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             elevation: 0,
