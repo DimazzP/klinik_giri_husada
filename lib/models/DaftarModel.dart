@@ -40,13 +40,13 @@ class DaftarModel {
     });
 
     var body = json.decode(response.body);
-
-    return DaftarModel(
-      status: body['status'],
-      title: body['title'],
-      message: body['message'],
-      data: body['data'],
-    );
+    return DaftarModel.fromJson(body);
+    // return DaftarModel(
+    //   status: body['status'],
+    //   title: body['title'],
+    //   message: body['message'],
+    //   data: DaftarResponse.fromJson(json['data']),
+    // );
   }
 }
 
@@ -65,6 +65,7 @@ class DaftarResponse {
     this.jenis_layanan,
     this.pekerjaan_nama,
   });
+
   factory DaftarResponse.fromJson(Map<String, dynamic> json) {
     return DaftarResponse(
       daftar_id: json['daftar_id'],

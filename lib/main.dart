@@ -10,6 +10,7 @@ import 'package:klinik_giri_husada/views/login.dart';
 import 'package:klinik_giri_husada/views/queue_message.dart';
 import 'package:klinik_giri_husada/views/register.dart';
 import 'package:klinik_giri_husada/views/splashscreen.dart';
+import 'package:klinik_giri_husada/views/success_queue.dart';
 
 void main() {
   WidgetsFlutterBinding();
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             '/queue': (context) => const QueuePage(),
             '/bottom_view': (context) => const BottomViews(),
             '/register': (context) => const Register(),
+            '/register_queque': (context) => const SuccessQueue(),
             '/account': (context) => const AccountPage(),
           },
         );

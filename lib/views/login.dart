@@ -2,13 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../helpers/FontFamily.dart';
 import '../helpers/colorThemes.dart';
-import '../helpers/FontSize.dart';
 import '../widgets/TextHelper.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../controllers/LoginController.dart';
 

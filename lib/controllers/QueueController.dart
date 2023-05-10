@@ -10,7 +10,9 @@ class QueueController {
       if (value.status! >= 400) {
         new OkDialog(context, value.title!, value.message!);
       } else {
-        new OkDialog(context, value.title!, value.message!);
+        Navigator.pushReplacementNamed(context, '/register_queque',
+            arguments: value.data![0].daftar_id);
+        // new OkDialog(context, value.title!, value.message!);
       }
     });
   }
