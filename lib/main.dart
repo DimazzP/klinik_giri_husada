@@ -7,6 +7,7 @@ import 'package:klinik_giri_husada/views/account.dart';
 import 'package:klinik_giri_husada/views/bottom_view.dart';
 import 'package:klinik_giri_husada/views/home.dart';
 import 'package:klinik_giri_husada/views/login.dart';
+import 'package:klinik_giri_husada/views/nomorantrian.dart';
 import 'package:klinik_giri_husada/views/queue_message.dart';
 import 'package:klinik_giri_husada/views/register.dart';
 import 'package:klinik_giri_husada/views/splashscreen.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
               primaryColor: AppColors.primary,
               primarySwatch: Palette.pcolor,
               fontFamily: 'nunito-sm'),
-          home: Splashscreen(),
+          home: TicketAntrian(),
           routes: {
             '/splashscreen': (context) => Splashscreen(),
             '/login': (context) => const Login(),
