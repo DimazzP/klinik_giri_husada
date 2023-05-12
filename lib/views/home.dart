@@ -263,7 +263,9 @@ class _HomePageState extends State<HomePage> {
                       fontFamily: FontFamily.bold,
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/history');
+                        },
                         child: TextHelper(
                           text: 'Lihat Semua',
                           fontSize: 16.sp,

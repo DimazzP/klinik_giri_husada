@@ -85,6 +85,9 @@ class _RegisterState extends State<Register> {
                               ctrl: tNik,
                               error: 'NIK tidak boleh kosong',
                               placeholder: 'Nomor KTP',
+                              hintText: 'Masukkan 16 angka',
+                              minimumLength: 16,
+                              error2: 'Jumlah NIK harus 16 angka',
                               inputFormatter: [
                                 FilteringTextInputFormatter.digitsOnly,
                                 LengthLimitingTextInputFormatter(16),
@@ -95,6 +98,9 @@ class _RegisterState extends State<Register> {
                             height: heightTop,
                             child: InputFieldForm(
                               ctrl: tNo,
+                              minimumLength: 12,
+                              error2: 'Minimal 12 angka',
+                              hintText: 'Masukkan 12-13 angka',
                               error: 'Nomor whatsapp tidak boleh kosong',
                               placeholder: 'Nomor Whatsapp',
                               inputFormatter: [
@@ -164,10 +170,13 @@ class _RegisterState extends State<Register> {
                             validator: (value) {
                               if (value.toString().isEmpty) {
                                 return "Masukkan Kata Sandi";
+                              } else if (value.toString().length < 8) {
+                                return 'Kata sandi minimal 8 huruf';
                               }
                             },
                             decoration: InputDecoration(
                                 labelText: "Kata Sandi",
+                                hintText: 'Minimal 8 huruf',
                                 suffixIcon: GestureDetector(
                                   child: controller.obscure1
                                       ? const Icon(Icons.visibility_off)

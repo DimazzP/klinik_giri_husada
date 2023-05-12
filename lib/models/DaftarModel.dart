@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/helpers/ApiHelper.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:klinik_giri_husada/models/ModelToken.dart';
+import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
+
+import 'UserModel.dart';
 
 class DaftarModel {
   final int? status;
@@ -41,12 +45,24 @@ class DaftarModel {
 
     var body = json.decode(response.body);
     return DaftarModel.fromJson(body);
-    // return DaftarModel(
-    //   status: body['status'],
-    //   title: body['title'],
-    //   message: body['message'],
-    //   data: DaftarResponse.fromJson(json['data']),
-    // );
+  }
+
+  static Future<DaftarModel> tampilDaftar(BuildContext context) async {
+    try {
+      final Future<Map<String, String>> myToken = ModelToken.getToken();
+      final storage = new FlutterSecureStorage();
+      String? jsonString = await storage.read(key: 'userdata');
+      UserResponse myObject = UserResponse.fromJson(json.decode(jsonString!));
+      String idPasien = myObject.user_id.toString();
+      Uri url = Uri.parse(Apihelper.url + 'daftar/pasien/$idPasien');
+      var response = await http.get(url, headers: await ModelToken.getToken());
+      var body = json.decode(response.body);
+      return DaftarModel.fromJson(body);
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('$e');
+    }
   }
 }
 
@@ -56,14 +72,14 @@ class DaftarResponse {
   final String? daftar_status;
   final int? daftar_nomor;
   final String? jenis_layanan;
-  final String? pekerjaan_nama;
+  final String? pekerja_nama;
   const DaftarResponse({
     this.daftar_id,
     this.daftar_tanggal,
     this.daftar_status,
     this.daftar_nomor,
     this.jenis_layanan,
-    this.pekerjaan_nama,
+    this.pekerja_nama,
   });
 
   factory DaftarResponse.fromJson(Map<String, dynamic> json) {
@@ -73,7 +89,7 @@ class DaftarResponse {
       daftar_status: json['daftar_status'],
       daftar_nomor: json['daftar_nomor'],
       jenis_layanan: json['jenis_layanan'],
-      pekerjaan_nama: json['pekerjaan_nama'],
+      pekerja_nama: json['pekerja_nama'],
     );
   }
 }

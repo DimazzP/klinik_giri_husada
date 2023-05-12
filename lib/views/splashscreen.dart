@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 import '../helpers/colorThemes.dart';
 
@@ -15,10 +17,21 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     // TODO: implement initState
+    // fetchData();
     Future.delayed(Duration(milliseconds: 3000), () {
-      Navigator.pushReplacementNamed(context, "/login");
+      fetchData();
     });
     super.initState();
+  }
+
+  Future<void> fetchData() async {
+    final storage = new FlutterSecureStorage();
+    String? jsonString = await storage.read(key: 'logstatus');
+    if (jsonString == 'true') {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      Navigator.pushReplacementNamed(context, "/login");
+    }
   }
 
   @override

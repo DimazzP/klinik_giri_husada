@@ -5,6 +5,7 @@ import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/helpers/pcolor.dart';
 import 'package:klinik_giri_husada/views/account.dart';
 import 'package:klinik_giri_husada/views/bottom_view.dart';
+import 'package:klinik_giri_husada/views/history.dart';
 import 'package:klinik_giri_husada/views/home.dart';
 import 'package:klinik_giri_husada/views/login.dart';
 import 'package:klinik_giri_husada/views/queue_message.dart';
@@ -45,8 +46,9 @@ class MyApp extends StatelessWidget {
             '/queue': (context) => const QueuePage(),
             '/bottom_view': (context) => const BottomViews(),
             '/register': (context) => const Register(),
-            '/register_queque': (context) => const SuccessQueue(),
+            '/register_queue': (context) => const SuccessQueue(),
             '/account': (context) => const AccountPage(),
+            '/history': (context) => const HistoryPage(),
           },
         );
       },

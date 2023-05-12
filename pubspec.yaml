@@ -37,6 +37,8 @@ dependencies:
   http: ^0.13.5
   flutter_secure_storage: ^8.0.0
   flutter_screenutil: ^5.7.0
+  intl: ^0.17.0
+  awesome_dialog: ^3.0.2
   # device_info_plus: ^8.2.1
 
 dev_dependencies:

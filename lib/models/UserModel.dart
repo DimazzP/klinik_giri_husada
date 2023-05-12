@@ -1,4 +1,8 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:klinik_giri_husada/helpers/OkDialog.dart';
+import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
+
 import '../helpers/ApiHelper.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,32 +33,51 @@ class UserModel {
     // }
   }
 
-  static Future<UserModel> register(String nowa, String sandi, String device,
-      String nama, String nik, String gender, String alamat) async {
-    Uri url = Uri.parse(Apihelper.url + 'auth/register');
-    var response = await http.post(url, body: {
-      'user_nowa': nowa,
-      'password': sandi,
-      'device_name': device,
-      'pasien_nama': nama,
-      'pasien_nik': nik,
-      'pasien_gender': gender,
-      'pasien_alamat': alamat,
-    });
-    var userData = json.decode(response.body);
-    return UserModel.fromJson(userData);
+  static Future<UserModel> register(
+      BuildContext context,
+      String nowa,
+      String sandi,
+      String device,
+      String nama,
+      String nik,
+      String gender,
+      String alamat) async {
+    try {
+      Uri url = Uri.parse(Apihelper.url + 'auth/register');
+      var response = await http.post(url, body: {
+        'user_nowa': nowa,
+        'password': sandi,
+        'device_name': device,
+        'pasien_nama': nama,
+        'pasien_nik': nik,
+        'pasien_gender': gender,
+        'pasien_alamat': alamat,
+      });
+      var userData = json.decode(response.body);
+      return UserModel.fromJson(userData);
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('error saya $e');
+    }
   }
 
-  static Future<UserModel> login(
-      String nowa, String sandi, String device_name) async {
-    Uri url = Uri.parse(Apihelper.url + 'auth/login');
-    var response = await http.post(url, body: {
-      'user_nowa': nowa,
-      'password': sandi,
-      'device_name': device_name,
-    });
-    var userData = json.decode(response.body);
-    return UserModel.fromJson(userData);
+  static Future<UserModel> login(BuildContext context, String nowa,
+      String sandi, String device_name) async {
+    try {
+      Uri url = Uri.parse(Apihelper.url + 'auth/login');
+      var response = await http.post(url, body: {
+        'user_nowa': nowa,
+        'password': sandi,
+        'device_name': device_name,
+      });
+      var userData = json.decode(response.body);
+      return UserModel.fromJson(userData);
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('error saya $e');
+    }
   }
 }
 
