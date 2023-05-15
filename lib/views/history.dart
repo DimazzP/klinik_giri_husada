@@ -41,7 +41,7 @@ class _HistoryPageState extends State<HistoryPage> {
       appBar: myAppbar,
       body: ListView.builder(
         itemBuilder: (context, index) {
-          DataPatient dp = data![index];
+          DataPatient dp = data[index];
           return Container(
             margin: EdgeInsets.all(6),
             decoration: BoxDecoration(

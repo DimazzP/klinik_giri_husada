@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.5 <3.0.0'
+  sdk: '>=2.19.0 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -37,6 +37,17 @@ dependencies:
   http: ^0.13.5
   flutter_secure_storage: ^8.0.0
   flutter_screenutil: ^5.7.0
+  url_launcher: ^6.1.10
+  whatsapp: ^2.0.0
+  animated_snack_bar: ^0.3.1
+  auto_size_text: ^3.0.0
+  shared_preferences: ^2.1.1
+  pin_code_fields: ^7.4.0
+
+  # awesome_snackbar_content: ^0.1.2
+  # animated_snack_bar: ^0.3.0
+  # whatsapp: ^2.0.0
+  # url_launcher: ^6.1.10
   # device_info_plus: ^8.2.1
 
 dev_dependencies:
@@ -105,5 +116,22 @@ flutter:
     - family: nunito-b
       fonts:
         - asset: assets/fonts/nunito-bold.ttf
+
+    # different font
+    - family: kgp-1
+      fonts:
+        - asset: assets/fonts/KGPrimaryPenmanship.ttf
+    - family: kgp-2
+      fonts:
+        - asset: assets/fonts/KGPrimaryPenmanship2.ttf
+    - family: kgp-alt
+      fonts:
+        - asset: assets/fonts/KGPrimaryPenmanshipAlt.ttf
+    - family: kgp-ln
+      fonts:
+        - asset: assets/fonts/KGPrimaryPenmanshipLined.ttf
+    # - family: kgp-np
+    #   fonts:
+    #     - asset: assets/fonts/KGPrimaryPenmanshipNOSPACE.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

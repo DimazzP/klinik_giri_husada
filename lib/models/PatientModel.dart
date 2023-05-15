@@ -8,6 +8,8 @@ class PatientModel {
   String? pesan;
   List<DataPatient>? data;
 
+  
+
   PatientModel({this.kode, this.pesan, this.data});
 
   static Future<PatientModel> registerPasien(String pasien_nama,

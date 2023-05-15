@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/models/UserModel.dart';
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 
 import '../helpers/OkDialog.dart';
 import '../models/PatientModel.dart';
@@ -41,8 +42,14 @@ class RegisterController {
   ) {
     // String device_name = await DeviceInfo.getInfo(context);
     if (sandi.toString().length < 8) {
-      new OkDialog(context, "Kata Sandi Terlalu Pendek",
-          "Masukkan kata sandi paling sedikit 8 karakter.");
+        AnimatedSnackBar.material(
+        'Kata Sandi Terlalu Pendek, Minimal 8 Karakter',
+        type: AnimatedSnackBarType.error, 
+        desktopSnackBarPosition: DesktopSnackBarPosition.topCenter,
+        // duration:  
+        ).show(context);
+      // new OkDialog(context, "Kata Sandi Terlalu Pendek",
+      //     "Masukkan kata sandi paling sedikit 8 karakter.");
     } else if (sandi != konfirm) {
       new OkDialog(context, 'Konfirmasi Kata Sandi',
           'Konfirmasi kata sandi yang anda masukkan tidak sesuai.');
