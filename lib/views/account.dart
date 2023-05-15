@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
+import 'package:klinik_giri_husada/views/editalamat.dart';
+import 'package:klinik_giri_husada/views/editnama.dart';
+import 'package:klinik_giri_husada/views/editnik.dart';
+import 'package:klinik_giri_husada/views/editnomor.dart';
 import 'package:klinik_giri_husada/views/login.dart';
 
 import '../controllers/AccountController.dart';
@@ -87,7 +91,13 @@ class _AccountPageState extends State<AccountPage> {
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditNama()));
+                                      },
                                       icon: Icon(
                                         Icons.keyboard_arrow_right,
                                         size: 25.0,
@@ -121,7 +131,13 @@ class _AccountPageState extends State<AccountPage> {
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditNik()));
+                                      },
                                       icon: Icon(
                                         Icons.keyboard_arrow_right,
                                         size: 25.0,
@@ -155,7 +171,13 @@ class _AccountPageState extends State<AccountPage> {
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditNomor()));
+                                      },
                                       icon: Icon(
                                         Icons.keyboard_arrow_right,
                                         size: 25.0,
@@ -189,7 +211,13 @@ class _AccountPageState extends State<AccountPage> {
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditAlamat()));
+                                      },
                                       icon: Icon(
                                         Icons.keyboard_arrow_right,
                                         size: 25.0,
@@ -209,7 +237,7 @@ class _AccountPageState extends State<AccountPage> {
                           ),
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 40.0,
                         ),
                         ElevatedButton(
                             onPressed: () {
@@ -220,7 +248,7 @@ class _AccountPageState extends State<AccountPage> {
                               style: TextStyle(color: Colors.white),
                             ),
                             style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.all(10.0),
+                                padding: EdgeInsets.all(20.0),
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.circular(16.0)))),

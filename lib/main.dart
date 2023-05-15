@@ -5,6 +5,7 @@ import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/helpers/pcolor.dart';
 import 'package:klinik_giri_husada/views/account.dart';
 import 'package:klinik_giri_husada/views/bottom_view.dart';
+import 'package:klinik_giri_husada/views/editnama.dart';
 import 'package:klinik_giri_husada/views/home.dart';
 import 'package:klinik_giri_husada/views/login.dart';
 import 'package:klinik_giri_husada/views/nomorantrian.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
               primaryColor: AppColors.primary,
               primarySwatch: Palette.pcolor,
               fontFamily: 'nunito-sm'),
-          home: TicketAntrian(),
+          home: AccountPage(),
           routes: {
             '/splashscreen': (context) => Splashscreen(),
             '/login': (context) => const Login(),

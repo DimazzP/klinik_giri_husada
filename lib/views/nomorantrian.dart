@@ -15,7 +15,7 @@ class _TicketAntrianState extends State<TicketAntrian> {
     // TODO: implement initState
     super.initState();
     data =
-        ModelAntrian.getData(daftar_nomor: "1", daftar_tanggal: "2023-05-10");
+        ModelAntrian.getData(daftar_nomor: "2", daftar_tanggal: "2023-05-10");
   }
 
   @override
