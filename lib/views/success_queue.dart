@@ -21,6 +21,17 @@ class SuccessQueue extends StatelessWidget {
   Widget build(BuildContext context) {
     DaftarResponse daftarResponse =
         ModalRoute.of(context)!.settings.arguments as DaftarResponse;
+    String time() {
+      DateFormat myFormat = DateFormat('yyyy-MM-dd');
+      DateTime date = myFormat.parse(daftarResponse.daftar_tanggal!);
+      date = DateTime(date.year, date.month, date.day, 7, 30);
+      int? nomorAntrian = daftarResponse.daftar_nomor;
+      nomorAntrian! > 8
+          ? date = date.add(Duration(minutes: nomorAntrian * 30 + 60))
+          : date = date.add(Duration(minutes: nomorAntrian * 30));
+      String formattedTime = DateFormat('HH:mm').format(date);
+      return '${formattedTime}';
+    }
 
     return Scaffold(
         backgroundColor: Color(0xfff1f1f1),
@@ -127,8 +138,10 @@ class SuccessQueue extends StatelessWidget {
                                   'assets/images/sc_dokter.png',
                                   'Nama Pasien',
                                   '${snapshot.data![0].toString()}'),
-                              isiContain('assets/images/sc_tanggal.png',
-                                  'Tanggal', '${snapshot.data![1].toString()}'),
+                              isiContain(
+                                  'assets/images/sc_tanggal.png',
+                                  'Tanggal',
+                                  '${snapshot.data![1].toString()}, ${time()} WIB'),
                               isiContain(
                                   'assets/images/sc_antrian.png',
                                   'Jumlah Antrian',
@@ -189,7 +202,7 @@ Widget isiContain(String image, String title, String value) {
                 TextHelper(
                     text: '$value',
                     fontSize: 16.sp,
-                    fontFamily: FontFamily.bold),
+                    fontFamily: FontFamily.semibold),
               ],
             ),
           )

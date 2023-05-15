@@ -174,6 +174,16 @@ class _QueuePageState extends State<QueuePage> {
                                           SizedBox(
                                             height: 40.h,
                                           ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 12.h),
+                                            child: TextHelper(
+                                              text: 'Pilih Tanggal Kunjungan',
+                                              fontSize: 16.sp,
+                                              fontFamily: FontFamily.regular,
+                                              fontColor: AppColors.grey,
+                                            ),
+                                          ),
                                           Container(
                                               child: Directionality(
                                                   textDirection:
