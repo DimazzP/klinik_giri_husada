@@ -22,13 +22,9 @@ class SuccessQueue extends StatelessWidget {
     DaftarResponse daftarResponse =
         ModalRoute.of(context)!.settings.arguments as DaftarResponse;
     String time() {
-      DateFormat myFormat = DateFormat('yyyy-MM-dd');
+      DateFormat myFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
       DateTime date = myFormat.parse(daftarResponse.daftar_tanggal!);
-      date = DateTime(date.year, date.month, date.day, 7, 30);
-      int? nomorAntrian = daftarResponse.daftar_nomor;
-      nomorAntrian! > 8
-          ? date = date.add(Duration(minutes: nomorAntrian * 30 + 60))
-          : date = date.add(Duration(minutes: nomorAntrian * 30));
+      print('aku test $date');
       String formattedTime = DateFormat('HH:mm').format(date);
       return '${formattedTime}';
     }

@@ -50,11 +50,26 @@ class DaftarModel {
   static Future<DaftarModel> tampilDaftar(BuildContext context) async {
     try {
       final Future<Map<String, String>> myToken = ModelToken.getToken();
-      final storage = new FlutterSecureStorage();
-      String? jsonString = await storage.read(key: 'userdata');
-      UserResponse myObject = UserResponse.fromJson(json.decode(jsonString!));
+      UserResponse myObject = await ModelToken.getUserData();
       String idPasien = myObject.user_id.toString();
       Uri url = Uri.parse(Apihelper.url + 'daftar/pasien/$idPasien');
+      var response = await http.get(url, headers: await ModelToken.getToken());
+      var body = json.decode(response.body);
+      return DaftarModel.fromJson(body);
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('$e');
+    }
+  }
+
+  static Future<DaftarModel> checkHour(
+      BuildContext context, String tanggal, String idjenis) async {
+    try {
+      UserResponse userdata = await ModelToken.getUserData();
+      String idPasien = userdata.user_id.toString();
+      Uri url = Uri.parse(Apihelper.url +
+          'daftar/jam/pasien/1/tanggal/$tanggal/layanan/$idjenis');
       var response = await http.get(url, headers: await ModelToken.getToken());
       var body = json.decode(response.body);
       return DaftarModel.fromJson(body);

@@ -24,54 +24,50 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+class _HomePageState extends State<HomePage> {
   List<DaftarResponse> data = [];
 
   void tampilkanData() async {
     DaftarModel.tampilDaftar(context).then((value) {
       data = value.data!;
-      // data = value.data!.reversed.toList();
       setState(() {});
     });
   }
 
-  String time(int index) {
-    DateFormat myFormat = DateFormat('yyyy-MM-dd');
-    DateTime date = myFormat.parse(data[index].daftar_tanggal!);
-    date = DateTime(date.year, date.month, date.day, 7, 30);
-    int? nomorAntrian = data[index].daftar_nomor;
-    // AwesomeWidget.errorDialog(context, 'test', nomorAntrian.toString());
-    nomorAntrian! > 8
-        ? date = date.add(Duration(minutes: nomorAntrian * 30 + 60))
-        : date = date.add(Duration(minutes: nomorAntrian * 30));
-    String formattedTime = DateFormat('HH:mm').format(date);
-    return '${formattedTime}';
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      AwesomeWidget.errorDialog(context, 'teste', 'tesT');
-      // tampilkanData();
-    }
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    WidgetsBinding.instance!.removeObserver(this);
-  }
+  // String time(int index) {
+  //   DateFormat myFormat = DateFormat('yyyy-MM-dd');
+  //   DateTime date = myFormat.parse(data[index].daftar_tanggal!);
+  //   date = DateTime(date.year, date.month, date.day, 7, 30);
+  //   int? nomorAntrian = data[index].daftar_nomor;
+  //   nomorAntrian! > 8
+  //       ? date = date.add(Duration(minutes: nomorAntrian * 30 + 60))
+  //       : date = date.add(Duration(minutes: nomorAntrian * 30));
+  //   String formattedTime = DateFormat('HH:mm').format(date);
+  //   return '${formattedTime}';
+  // }
 
   @override
   void initState() {
     super.initState();
     tampilkanData();
-    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
   Widget build(BuildContext context) {
+    String time(int index) {
+      DateFormat myFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+      DateTime date = myFormat.parse(data[index].daftar_tanggal.toString());
+      String formattedTime = DateFormat('HH:mm').format(date);
+      return '${formattedTime}';
+    }
+
+    String myDate(int index) {
+      DateFormat myFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+      DateTime date = myFormat.parse(data[index].daftar_tanggal.toString());
+      String formattedTime = DateFormat('dd-MM-yyyy').format(date);
+      return '${formattedTime}';
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: FutureBuilder<String>(future: () async {
@@ -358,7 +354,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                     bgColor = Colors.red.withOpacity(0.95);
                                     break;
                                   case "SELESAI":
-                                    bgColor = AppColors.primary;
+                                    bgColor = AppColors.green;
                                     break;
                                   default:
                                     bgColor = Colors.grey;
@@ -401,7 +397,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                         ),
                                         SizedBox(height: 10.h),
                                         TextHelper(
-                                          text: data[index].daftar_tanggal,
+                                          text: '${myDate(index)}',
                                           fontSize: 15.sp,
                                           fontColor: AppColors.grey,
                                           fontFamily: FontFamily.regular,
@@ -413,9 +409,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                           fontFamily: FontFamily.bold,
                                         ),
                                         TextHelper(
-                                          text: 'Jam ${time(index)}',
+                                          // text: 'Jam ${time(index)}',
+                                          text: '${time(index)}',
                                           fontSize: 16.sp,
-                                          fontFamily: FontFamily.bold,
+                                          fontFamily: FontFamily.semibold,
                                         ),
                                         SizedBox(height: 40.h),
                                         ClipRRect(

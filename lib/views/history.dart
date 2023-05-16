@@ -35,14 +35,17 @@ class _HistoryPageState extends State<HistoryPage>
   }
 
   String time(int index) {
-    DateTime date = DateTime.parse(myData[index].daftar_tanggal.toString());
-    date = DateTime(date.year, date.month, date.day, 7, 30);
-    int? nomorAntrian = myData[index].daftar_nomor;
-    nomorAntrian! > 8
-        ? date = date.add(Duration(minutes: nomorAntrian * 30 + 60))
-        : date = date.add(Duration(minutes: nomorAntrian * 30));
+    DateFormat myFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime date = myFormat.parse(myData[index].daftar_tanggal.toString());
     String formattedTime = DateFormat('HH:mm').format(date);
-    return '$formattedTime';
+    return '${formattedTime}';
+  }
+
+  String myDate(int index) {
+    DateFormat myFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime date = myFormat.parse(myData[index].daftar_tanggal.toString());
+    String formattedTime = DateFormat('dd-MM-yyyy').format(date);
+    return '${formattedTime}';
   }
 
   void ubahData() {
@@ -133,188 +136,210 @@ class _HistoryPageState extends State<HistoryPage>
         backgroundColor: Color(0xffFFFFFF),
         automaticallyImplyLeading: false,
       ),
-      body: Flex(
-        direction: Axis.vertical,
-        children: [
-          Container(
-            padding: EdgeInsets.only(top: 6.h),
-            color: Colors.white,
-            child: TabBar(
-              indicatorColor: AppColors.primary,
-              controller: _tabController,
-              isScrollable: true,
-              labelColor: AppColors.primary,
-              labelPadding: EdgeInsets.zero,
-              unselectedLabelStyle: TextStyle(fontFamily: FontFamily.bold),
-              unselectedLabelColor: AppColors.grey,
-              tabs: [
-                Tab(
-                  child: Container(
-                    width: 100.w,
-                    alignment: Alignment.center,
-                    child: TextHelper(
-                      text: 'Semua',
-                      fontSize: 14.sp,
-                      fontFamily: FontFamily.semibold,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Container(
-                    width: 100.w,
-                    alignment: Alignment.center,
-                    child: Wrap(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 4.w),
-                          width: 20.w,
-                          height: 20.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.yellow,
+      body: myData.isEmpty
+          ? FutureBuilder(
+              future: Future.delayed(
+                  Duration(seconds: 1)), // Future.delayed dengan durasi 2 detik
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Center(
+                      child: TextHelper(
+                    text: 'Tidak Ada Riwayat Pendaftaran',
+                    fontSize: 18.sp,
+                  ));
+                }
+              },
+            )
+          : Flex(
+              direction: Axis.vertical,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 6.h),
+                  color: Colors.white,
+                  child: TabBar(
+                    indicatorColor: AppColors.primary,
+                    controller: _tabController,
+                    isScrollable: true,
+                    labelColor: AppColors.primary,
+                    labelPadding: EdgeInsets.zero,
+                    unselectedLabelStyle:
+                        TextStyle(fontFamily: FontFamily.bold),
+                    unselectedLabelColor: AppColors.grey,
+                    tabs: [
+                      Tab(
+                        child: Container(
+                          width: 100.w,
+                          alignment: Alignment.center,
+                          child: TextHelper(
+                            text: 'Semua',
+                            fontSize: 14.sp,
+                            fontFamily: FontFamily.semibold,
                           ),
                         ),
-                        TextHelper(
-                          text: 'Berlangsung',
-                          fontSize: 14.sp,
-                          fontFamily: FontFamily.semibold,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Container(
-                    width: 100.w,
-                    alignment: Alignment.center,
-                    child: Wrap(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 4.w),
-                          width: 20.w,
-                          height: 20.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.green,
+                      ),
+                      Tab(
+                        child: Container(
+                          width: 100.w,
+                          alignment: Alignment.center,
+                          child: Wrap(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 4.w),
+                                width: 20.w,
+                                height: 20.h,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.yellow,
+                                ),
+                              ),
+                              TextHelper(
+                                text: 'Berlangsung',
+                                fontSize: 14.sp,
+                                fontFamily: FontFamily.semibold,
+                              ),
+                            ],
                           ),
                         ),
-                        TextHelper(
-                          text: 'Selesai',
-                          fontSize: 14.sp,
-                          fontFamily: FontFamily.semibold,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Container(
-                    width: 100.w,
-                    alignment: Alignment.center,
-                    child: Wrap(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 4.w),
-                          width: 20.w,
-                          height: 20.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
+                      ),
+                      Tab(
+                        child: Container(
+                          width: 100.w,
+                          alignment: Alignment.center,
+                          child: Wrap(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 4.w),
+                                width: 20.w,
+                                height: 20.h,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.green,
+                                ),
+                              ),
+                              TextHelper(
+                                text: 'Selesai',
+                                fontSize: 14.sp,
+                                fontFamily: FontFamily.semibold,
+                              ),
+                            ],
                           ),
                         ),
-                        TextHelper(
-                          text: 'Batal',
-                          fontSize: 14.sp,
-                          fontFamily: FontFamily.semibold,
+                      ),
+                      Tab(
+                        child: Container(
+                          width: 100.w,
+                          alignment: Alignment.center,
+                          child: Wrap(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 4.w),
+                                width: 20.w,
+                                height: 20.h,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              TextHelper(
+                                text: 'Batal',
+                                fontSize: 14.sp,
+                                fontFamily: FontFamily.semibold,
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                ),
+                SizedBox(height: 20.h),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: myData.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.r)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey
+                                    .withOpacity(0.5), // Warna bayangan
+                                spreadRadius: 2, // Radius penyebaran bayangan
+                                blurRadius: 5, // Radius blur bayangan
+                                offset: Offset(0,
+                                    3), // Offset dari bayangan (horizontal, vertical)
+                              ),
+                            ],
+                          ),
+                          margin: EdgeInsets.all(5.sp),
+                          child: ListTile(
+                            onTap: () {
+                              setState(() {
+                                DaftarResponse kirimData = myData[index];
+                                Navigator.pushNamed(context, '/register_queue',
+                                    arguments: kirimData);
+                              });
+                            },
+                            leading: Container(
+                              child: Padding(
+                                padding: EdgeInsets.all(10.sp),
+                                child: TextHelper(
+                                  text: '${myData[index].daftar_nomor}',
+                                  fontSize: 28.sp,
+                                  fontFamily: FontFamily.bold,
+                                  fontColor: Colors.white,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                    colors: [
+                                      getMyColor(myData[index]
+                                          .daftar_status
+                                          .toString()),
+                                      AppColors.black2
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter),
+                                // color: getMyColor(
+                                //     myData[index].daftar_status.toString()),
+                              ),
+                            ),
+                            trailing: TextHelper(
+                              text: myDate(index),
+                              fontSize: 14.sp,
+                              fontColor: AppColors.grey,
+                            ),
+                            title: Padding(
+                              padding: EdgeInsets.only(top: 8.h),
+                              child: TextHelper(
+                                text:
+                                    'Pelayanan ${myData[index].jenis_layanan}',
+                                fontSize: 18.sp,
+                                fontFamily: FontFamily.bold,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: EdgeInsets.only(bottom: 8.h, top: 4.h),
+                              child: TextHelper(
+                                  text:
+                                      'Nomor antrian anda akan dilayani pada jam ${time(index)} WIB',
+                                  fontSize: 14.sp),
+                            ),
+                          ),
+                        );
+                      }),
                 ),
               ],
             ),
-          ),
-          SizedBox(height: 20.h),
-          Flexible(
-            fit: FlexFit.tight,
-            // flex: 20,
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: myData.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(4.r)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5), // Warna bayangan
-                          spreadRadius: 2, // Radius penyebaran bayangan
-                          blurRadius: 5, // Radius blur bayangan
-                          offset: Offset(0,
-                              3), // Offset dari bayangan (horizontal, vertical)
-                        ),
-                      ],
-                    ),
-                    margin: EdgeInsets.all(5.sp),
-                    child: ListTile(
-                      onTap: () {
-                        setState(() {
-                          DaftarResponse kirimData = myData[index];
-                          Navigator.pushNamed(context, '/register_queue',
-                              arguments: kirimData);
-                        });
-                      },
-                      leading: Container(
-                        child: Padding(
-                          padding: EdgeInsets.all(10.sp),
-                          child: TextHelper(
-                            text: '${myData[index].daftar_nomor}',
-                            fontSize: 28.sp,
-                            fontFamily: FontFamily.bold,
-                            fontColor: Colors.white,
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                              colors: [
-                                getMyColor(
-                                    myData[index].daftar_status.toString()),
-                                AppColors.black2
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter),
-                          // color: getMyColor(
-                          //     myData[index].daftar_status.toString()),
-                        ),
-                      ),
-                      trailing: TextHelper(
-                        text: myData[index].daftar_tanggal,
-                        fontSize: 14.sp,
-                        fontColor: AppColors.grey,
-                      ),
-                      title: Padding(
-                        padding: EdgeInsets.only(top: 8.h),
-                        child: TextHelper(
-                          text: 'Pelayanan ${myData[index].jenis_layanan}',
-                          fontSize: 18.sp,
-                          fontFamily: FontFamily.bold,
-                        ),
-                      ),
-                      subtitle: Padding(
-                        padding: EdgeInsets.only(bottom: 8.h, top: 4.h),
-                        child: TextHelper(
-                            text:
-                                'Nomor antrian anda akan dilayani pada jam ${time(index)} WIB',
-                            fontSize: 14.sp),
-                      ),
-                    ),
-                  );
-                }),
-          ),
-        ],
-      ),
     );
   }
 }

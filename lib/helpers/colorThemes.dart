@@ -9,4 +9,5 @@ class AppColors {
   static final green = const Color(0xff00ca71);
   static final yellow = const Color(0xfffeb800);
   static final grey2 = const Color(0xffD9D9D9);
+  static final grey3 = const Color(0xffD7DEEA);
 }

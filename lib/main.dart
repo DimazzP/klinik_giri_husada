@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/helpers/pcolor.dart';
 import 'package:klinik_giri_husada/views/account.dart';
-import 'package:klinik_giri_husada/views/bottom_view.dart';
+// import 'package:klinik_giri_husada/views/bottom_view.dart';
 import 'package:klinik_giri_husada/views/history.dart';
 import 'package:klinik_giri_husada/views/home.dart';
 import 'package:klinik_giri_husada/views/login.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             '/login': (context) => const Login(),
             '/home': (context) => const HomePage(),
             '/queue': (context) => const QueuePage(),
-            '/bottom_view': (context) => const BottomViews(),
+            // '/bottom_view': (context) => const BottomViews(),
             '/register': (context) => const Register(),
             '/register_queue': (context) => const SuccessQueue(),
             '/account': (context) => const AccountPage(),

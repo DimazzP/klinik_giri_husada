@@ -5,6 +5,9 @@ import 'package:klinik_giri_husada/models/DaftarModel.dart';
 import '../widgets/AwesomeDialogWidget.dart';
 
 class QueueController {
+  // static void btCheckHour(
+  //     BuildContext context, String tanggal, String idjenis) async {}
+
   static void btRegist(BuildContext context, String tanggal, String status,
       String idpasien, String idjenis, String nomor_antrian) async {
     if (nomor_antrian == '17') {
