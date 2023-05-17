@@ -18,12 +18,12 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  late Future<ModelProfile> data;
+  late Future<ModelProfile>? data;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    data = ModelProfile.getData(pasiend_id: "1");
+    data = ModelProfile.getData(pasiend_id: "4");
   }
 
   @override
@@ -39,7 +39,7 @@ class _AccountPageState extends State<AccountPage> {
           future: data,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // return Text(snapshot.data!.pasien_nama);
+              // return Text(snapshot.data?.pasien_nama);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
@@ -50,7 +50,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
                 CircleAvatar(
                   maxRadius: 70,
-                  backgroundImage: snapshot.data!.pasien_gender == "L"
+                  backgroundImage: snapshot.data?.pasien_gender == "L"
                       ? AssetImage('assets/images/lakik.png')
                       : AssetImage('assets/images/wedok.png'),
                 ),
@@ -87,7 +87,7 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                               Row(
                                 children: [
-                                  Text("${snapshot.data!.pasien_nama}",
+                                  Text("${snapshot.data?.pasien_nama}",
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,
@@ -127,7 +127,7 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                               Row(
                                 children: [
-                                  Text("${snapshot.data!.pasien_nik}",
+                                  Text("${snapshot.data?.pasien_nik}",
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,
@@ -167,7 +167,7 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                               Row(
                                 children: [
-                                  Text("${snapshot.data!.pasien_nowa}",
+                                  Text("${snapshot.data?.pasien_nowa}",
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,
@@ -207,7 +207,7 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                               Row(
                                 children: [
-                                  Text("${snapshot.data!.pasien_alamat}",
+                                  Text("${snapshot.data?.pasien_alamat}",
                                       style: TextStyle(fontSize: 16)),
                                   IconButton(
                                       iconSize: 14,

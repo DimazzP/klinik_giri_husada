@@ -33,7 +33,7 @@ class ModelAntrian {
   static Future<ModelAntrian> getData(
       {String? daftar_nomor, String? daftar_tanggal}) async {
     var response = await http.post(
-        Uri.parse('http://192.168.1.21:8000/api/daftar/getnomor'),
+        Uri.parse('http://172.16.103.211:8000/api/daftar/getnomor'),
         body: {'daftar_nomor': daftar_nomor, 'daftar_tanggal': daftar_tanggal});
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);

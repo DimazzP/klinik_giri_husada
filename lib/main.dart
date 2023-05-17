@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
               primaryColor: AppColors.primary,
               primarySwatch: Palette.pcolor,
               fontFamily: 'nunito-sm'),
-          home: AccountPage(),
+          home: Splashscreen(),
           routes: {
             '/splashscreen': (context) => Splashscreen(),
             '/login': (context) => const Login(),

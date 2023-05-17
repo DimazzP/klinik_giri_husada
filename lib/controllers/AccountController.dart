@@ -29,7 +29,7 @@ class ModelProfile {
 
   static Future<ModelProfile> getData({String? pasiend_id}) async {
     var response = await http.post(
-        Uri.parse('http://192.168.1.21:8000/api/daftar/getprofile'),
+        Uri.parse('http://172.16.103.211:8000/api/daftar/getprofile'),
         body: {'pasien_id': pasiend_id});
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);

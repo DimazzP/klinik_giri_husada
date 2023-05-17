@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil: ^5.7.0
   flutter_ticket_widget: ^0.0.1
   ticket_widget: ^0.0.1
+  awesome_snackbar_content: ^0.1.2
   # device_info_plus: ^8.2.1
 
 dev_dependencies:
