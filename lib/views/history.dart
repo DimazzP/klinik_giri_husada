@@ -136,128 +136,136 @@ class _HistoryPageState extends State<HistoryPage>
         backgroundColor: Color(0xffFFFFFF),
         automaticallyImplyLeading: false,
       ),
-      body: myData.isEmpty
-          ? FutureBuilder(
-              future: Future.delayed(
-                  Duration(seconds: 1)), // Future.delayed dengan durasi 2 detik
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return Center(
-                      child: TextHelper(
-                    text: 'Tidak Ada Riwayat Pendaftaran',
-                    fontSize: 18.sp,
-                  ));
-                }
-              },
-            )
-          : Flex(
-              direction: Axis.vertical,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 6.h),
-                  color: Colors.white,
-                  child: TabBar(
-                    indicatorColor: AppColors.primary,
-                    controller: _tabController,
-                    isScrollable: true,
-                    labelColor: AppColors.primary,
-                    labelPadding: EdgeInsets.zero,
-                    unselectedLabelStyle:
-                        TextStyle(fontFamily: FontFamily.bold),
-                    unselectedLabelColor: AppColors.grey,
-                    tabs: [
-                      Tab(
-                        child: Container(
-                          width: 100.w,
-                          alignment: Alignment.center,
-                          child: TextHelper(
-                            text: 'Semua',
-                            fontSize: 14.sp,
-                            fontFamily: FontFamily.semibold,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          width: 100.w,
-                          alignment: Alignment.center,
-                          child: Wrap(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 4.w),
-                                width: 20.w,
-                                height: 20.h,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.yellow,
-                                ),
-                              ),
-                              TextHelper(
-                                text: 'Berlangsung',
-                                fontSize: 14.sp,
-                                fontFamily: FontFamily.semibold,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          width: 100.w,
-                          alignment: Alignment.center,
-                          child: Wrap(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 4.w),
-                                width: 20.w,
-                                height: 20.h,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.green,
-                                ),
-                              ),
-                              TextHelper(
-                                text: 'Selesai',
-                                fontSize: 14.sp,
-                                fontFamily: FontFamily.semibold,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          width: 100.w,
-                          alignment: Alignment.center,
-                          child: Wrap(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 4.w),
-                                width: 20.w,
-                                height: 20.h,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              TextHelper(
-                                text: 'Batal',
-                                fontSize: 14.sp,
-                                fontFamily: FontFamily.semibold,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+      body: Flex(
+        direction: Axis.vertical,
+        children: [
+          Container(
+            padding: EdgeInsets.only(top: 6.h),
+            color: Colors.white,
+            child: TabBar(
+              indicatorColor: AppColors.primary,
+              controller: _tabController,
+              isScrollable: true,
+              labelColor: AppColors.primary,
+              labelPadding: EdgeInsets.zero,
+              unselectedLabelStyle: TextStyle(fontFamily: FontFamily.bold),
+              unselectedLabelColor: AppColors.grey,
+              tabs: [
+                Tab(
+                  child: Container(
+                    constraints: BoxConstraints(minWidth: 100.w),
+
+                    // width: 100.w,
+                    alignment: Alignment.center,
+                    child: TextHelper(
+                      text: 'Semua',
+                      fontSize: 14.sp,
+                      fontFamily: FontFamily.semibold,
+                    ),
                   ),
                 ),
-                SizedBox(height: 20.h),
-                Flexible(
+                Tab(
+                  child: Container(
+                    constraints: BoxConstraints(minWidth: 100.w),
+
+                    // width: 100.w,
+                    alignment: Alignment.center,
+                    child: Wrap(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 4.w),
+                          width: 20.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.yellow,
+                          ),
+                        ),
+                        TextHelper(
+                          text: 'Berlangsung',
+                          fontSize: 14.sp,
+                          fontFamily: FontFamily.semibold,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Container(
+                    constraints: BoxConstraints(minWidth: 100.w),
+
+                    // width: 100.w,
+                    alignment: Alignment.center,
+                    child: Wrap(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 4.w),
+                          width: 20.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.green,
+                          ),
+                        ),
+                        TextHelper(
+                          text: 'Selesai',
+                          fontSize: 14.sp,
+                          fontFamily: FontFamily.semibold,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Container(
+                    constraints: BoxConstraints(minWidth: 100.w),
+                    // width: 100.w,
+                    alignment: Alignment.center,
+                    child: Wrap(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 4.w),
+                          width: 20.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red,
+                          ),
+                        ),
+                        TextHelper(
+                          text: 'Batal',
+                          fontSize: 14.sp,
+                          fontFamily: FontFamily.semibold,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20.h),
+          myData.isEmpty
+              ? FutureBuilder(
+                  future: Future.delayed(Duration(
+                      seconds: 1)), // Future.delayed dengan durasi 2 detik
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        margin: EdgeInsets.only(top: 270.h),
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return Container(
+                          margin: EdgeInsets.only(top: 270.h),
+                          child: TextHelper(
+                            text: 'Riwayat Kosong',
+                            fontSize: 18.sp,
+                          ));
+                    }
+                  },
+                )
+              : Flexible(
                   fit: FlexFit.tight,
                   child: ListView.builder(
                       shrinkWrap: true,
@@ -289,14 +297,14 @@ class _HistoryPageState extends State<HistoryPage>
                               });
                             },
                             leading: Container(
-                              child: Padding(
-                                padding: EdgeInsets.all(10.sp),
-                                child: TextHelper(
-                                  text: '${myData[index].daftar_nomor}',
-                                  fontSize: 28.sp,
-                                  fontFamily: FontFamily.bold,
-                                  fontColor: Colors.white,
-                                ),
+                              alignment: Alignment.center,
+                              width: 50.sp,
+                              height: 50.sp,
+                              child: TextHelper(
+                                text: '${myData[index].daftar_id}',
+                                fontSize: 24.sp,
+                                fontFamily: FontFamily.bold,
+                                fontColor: Colors.white,
                               ),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -338,8 +346,8 @@ class _HistoryPageState extends State<HistoryPage>
                         );
                       }),
                 ),
-              ],
-            ),
+        ],
+      ),
     );
   }
 }

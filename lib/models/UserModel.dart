@@ -6,6 +6,8 @@ import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import '../helpers/ApiHelper.dart';
 import 'package:http/http.dart' as http;
 
+import 'ModelToken.dart';
+
 class UserModel {
   int? status;
   String? title;
@@ -21,6 +23,8 @@ class UserModel {
     if (json['data'] != null && json['token'] != null) {
       myData = UserResponse.fromJson(json['data']);
       myToken = json['token'];
+    } else if (json['data'] != null) {
+      myData = UserResponse.fromJson(json['data']);
     }
 
     return UserModel(
@@ -79,6 +83,26 @@ class UserModel {
       throw Exception('error saya $e');
     }
   }
+
+  static Future<UserModel> ubahData(BuildContext context, String idUser,
+      String sandi, String category, String myvalue) async {
+    try {
+      Uri url = Uri.parse(Apihelper.url + 'user/ubah');
+      var response =
+          await http.post(url, headers: await ModelToken.getToken(), body: {
+        'user_id': idUser,
+        'password': sandi,
+        'category': category,
+        'value': myvalue,
+      });
+      var userData = json.decode(response.body);
+      return UserModel.fromJson(userData);
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('error saya $e');
+    }
+  }
 }
 
 class UserResponse {
@@ -110,6 +134,7 @@ class UserResponse {
 class ProfileResponse {
   final int? pasien_id;
   final String? pasien_nama;
+  final String? pasien_nik;
   final String? pasien_gender;
   final String? pasien_foto;
   final String? pasien_alamat;
@@ -117,6 +142,7 @@ class ProfileResponse {
   const ProfileResponse({
     this.pasien_id,
     this.pasien_nama,
+    this.pasien_nik,
     this.pasien_gender,
     this.pasien_foto,
     this.pasien_alamat,
@@ -126,6 +152,8 @@ class ProfileResponse {
     return ProfileResponse(
       pasien_id: json['pasien_id'],
       pasien_nama: json['pasien_nama'],
+      pasien_nik: json['pasien_nik'],
+      pasien_gender: json['pasien_gender'],
       pasien_foto: json['pasien_foto'],
       pasien_alamat: json['pasien_alamat'],
     );
@@ -135,6 +163,8 @@ class ProfileResponse {
     return {
       'pasien_id': pasien_id,
       'pasien_nama': pasien_nama,
+      'pasien_nik': pasien_nik,
+      'pasien_gender': pasien_gender,
       'pasien_foto': pasien_foto,
       'pasien_alamat': pasien_alamat,
     };

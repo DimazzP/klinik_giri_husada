@@ -193,11 +193,6 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            // LayananModel.getJenis('1', '2023-5-8')
-                            //     .then((value) {
-                            //   new OkDialog(context, value.status.toString(),
-                            //       value.message.toString());
-                            // });
                             Navigator.pushNamed(context, '/queue',
                                 arguments: 1);
                           },
@@ -321,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 16.h),
                     data.isEmpty
                         ? Padding(
                             padding: EdgeInsets.only(top: 100),
@@ -335,16 +330,16 @@ class _HomePageState extends State<HomePage> {
                             ),
                           )
                         : GridView.count(
+                            physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             crossAxisCount: 2,
                             mainAxisSpacing: 20,
                             crossAxisSpacing: 20,
-                            childAspectRatio: 4 / 5.1,
+                            childAspectRatio: 4 / 5.2,
                             children: List.generate(
                               data.length <= 2 ? data.length : 2,
                               (index) {
                                 DaftarResponse kirimData = data[index];
-
                                 Color bgColor;
                                 switch (data[index].daftar_status) {
                                   case "BERLANGSUNG":
@@ -386,8 +381,8 @@ class _HomePageState extends State<HomePage> {
                                         Padding(
                                           padding: EdgeInsets.all(20),
                                           child: Container(
-                                            height: 60.h,
-                                            width: 60.w,
+                                            height: 50.h,
+                                            width: 50.w,
                                             color: Colors.white,
                                             child: Image.asset(
                                               'assets/images/${data[index].jenis_layanan.toString().replaceAll(' ', '').toLowerCase()}_icon.png',
@@ -414,12 +409,12 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: 16.sp,
                                           fontFamily: FontFamily.semibold,
                                         ),
-                                        SizedBox(height: 40.h),
+                                        SizedBox(height: 10.h),
                                         ClipRRect(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20.r)),
                                           child: Container(
-                                              width: 110.w,
+                                              width: 120.w,
                                               alignment: Alignment.center,
                                               color: bgColor,
                                               padding: EdgeInsets.symmetric(
@@ -432,7 +427,6 @@ class _HomePageState extends State<HomePage> {
                                                 fontColor: Colors.white,
                                               )),
                                         ),
-                                        SizedBox(height: 15.h),
                                       ],
                                     ),
                                   ),

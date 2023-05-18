@@ -94,7 +94,6 @@ class _LoginState extends State<Login> {
                 child: TextFormField(
                   controller: tNowa,
                   style: TextStyle(fontSize: 18.sp, color: AppColors.black),
-                  // showCursor: false,
                   validator: (value) {
                     if (value.toString().isEmpty) {
                       return "Masukkan Nomor Anda";

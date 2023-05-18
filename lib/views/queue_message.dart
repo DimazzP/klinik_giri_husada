@@ -126,6 +126,7 @@ class _QueuePageState extends State<QueuePage> {
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInOut,
           );
+          setState(() {});
         });
       } else {
         AwesomeWidget.errorDialog(context, value.title!, value.message!);

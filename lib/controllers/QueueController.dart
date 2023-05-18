@@ -14,8 +14,7 @@ class QueueController {
       AwesomeWidget.errorDialog(context, 'Melebihi Batas',
           'Layanan online pada tanggal tersebut melebihi batas. Anda sudah tidak bisa lagi mendaftar.');
     } else {
-      DaftarModel.tambahDaftar(
-              tanggal, status, idpasien, idjenis, nomor_antrian)
+      DaftarModel.tambahDaftar(tanggal, status, idpasien, idjenis)
           .then((value) {
         if (value.status! >= 400) {
           AwesomeWidget.errorDialog(context, value.title!, value.message!);
@@ -26,5 +25,21 @@ class QueueController {
         }
       });
     }
+  }
+
+  static void batalkan(BuildContext context, String idDaftar) async {
+    AwesomeWidget.infoDialog(context, 'Batalkan Pesanan',
+        'Nomor antrian anda akan dihapus jika anda membatalkan pendaftaran anda.',
+        () {
+      DaftarModel.batalkan(context, idDaftar).then((value) {
+        if (value.status! >= 400) {
+          AwesomeWidget.errorDialog(context, value.title!, value.message!);
+        } else {
+          Navigator.pop(context);
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/success_cancel');
+        }
+      });
+    });
   }
 }

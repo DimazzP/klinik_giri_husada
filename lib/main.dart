@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/helpers/pcolor.dart';
+import 'package:klinik_giri_husada/views/edit_user.dart';
 import 'package:klinik_giri_husada/views/account.dart';
+import 'package:klinik_giri_husada/views/change_account.dart';
 // import 'package:klinik_giri_husada/views/bottom_view.dart';
 import 'package:klinik_giri_husada/views/history.dart';
 import 'package:klinik_giri_husada/views/home.dart';
@@ -11,6 +13,7 @@ import 'package:klinik_giri_husada/views/login.dart';
 import 'package:klinik_giri_husada/views/queue_message.dart';
 import 'package:klinik_giri_husada/views/register.dart';
 import 'package:klinik_giri_husada/views/splashscreen.dart';
+import 'package:klinik_giri_husada/views/success_cancel.dart';
 import 'package:klinik_giri_husada/views/success_queue.dart';
 
 void main() {
@@ -49,6 +52,9 @@ class MyApp extends StatelessWidget {
             '/register_queue': (context) => const SuccessQueue(),
             '/account': (context) => const AccountPage(),
             '/history': (context) => const HistoryPage(),
+            '/change_account': (context) => const ChangeAccount(),
+            '/success_cancel': (context) => const SuccessCancel(),
+            '/edit_user': (context) => EditUser(),
           },
         );
       },

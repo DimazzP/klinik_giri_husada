@@ -30,9 +30,9 @@ class DaftarModel {
         data: fillData);
   }
 
-  static Future<DaftarModel> tambahDaftar(String tanggal, String status,
-      String idpasien, String idjenis, String nomor_antrian) async {
-    final Future<Map<String, String>> myToken = ModelToken.getToken();
+  static Future<DaftarModel> tambahDaftar(
+      String tanggal, String status, String idpasien, String idjenis) async {
+    // final Future<Map<String, String>> myToken = ModelToken.getToken();
     Uri url = Uri.parse(Apihelper.url + 'daftar');
     var response =
         await http.post(url, headers: await ModelToken.getToken(), body: {
@@ -40,7 +40,6 @@ class DaftarModel {
       'daftar_status': status,
       'daftar_idpasien': idpasien,
       'daftar_idjenis': idjenis,
-      'daftar_nomor': nomor_antrian
     });
 
     var body = json.decode(response.body);
@@ -69,8 +68,24 @@ class DaftarModel {
       UserResponse userdata = await ModelToken.getUserData();
       String idPasien = userdata.user_id.toString();
       Uri url = Uri.parse(Apihelper.url +
-          'daftar/jam/pasien/1/tanggal/$tanggal/layanan/$idjenis');
+          'daftar/jam/pasien/$idPasien/tanggal/$tanggal/layanan/$idjenis');
       var response = await http.get(url, headers: await ModelToken.getToken());
+      var body = json.decode(response.body);
+      return DaftarModel.fromJson(body);
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('$e');
+    }
+  }
+
+  static Future<DaftarModel> batalkan(
+      BuildContext context, String iddaftar) async {
+    try {
+      UserResponse userdata = await ModelToken.getUserData();
+      String idPasien = userdata.user_id.toString();
+      Uri url = Uri.parse(Apihelper.url + 'daftar/batal/$iddaftar');
+      var response = await http.put(url, headers: await ModelToken.getToken());
       var body = json.decode(response.body);
       return DaftarModel.fromJson(body);
     } catch (e) {
@@ -85,14 +100,12 @@ class DaftarResponse {
   final int? daftar_id;
   final String? daftar_tanggal;
   final String? daftar_status;
-  final int? daftar_nomor;
   final String? jenis_layanan;
   final String? pekerja_nama;
   const DaftarResponse({
     this.daftar_id,
     this.daftar_tanggal,
     this.daftar_status,
-    this.daftar_nomor,
     this.jenis_layanan,
     this.pekerja_nama,
   });
@@ -102,7 +115,6 @@ class DaftarResponse {
       daftar_id: json['daftar_id'],
       daftar_tanggal: json['daftar_tanggal'],
       daftar_status: json['daftar_status'],
-      daftar_nomor: json['daftar_nomor'],
       jenis_layanan: json['jenis_layanan'],
       pekerja_nama: json['pekerja_nama'],
     );
