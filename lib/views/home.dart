@@ -34,18 +34,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // String time(int index) {
-  //   DateFormat myFormat = DateFormat('yyyy-MM-dd');
-  //   DateTime date = myFormat.parse(data[index].daftar_tanggal!);
-  //   date = DateTime(date.year, date.month, date.day, 7, 30);
-  //   int? nomorAntrian = data[index].daftar_nomor;
-  //   nomorAntrian! > 8
-  //       ? date = date.add(Duration(minutes: nomorAntrian * 30 + 60))
-  //       : date = date.add(Duration(minutes: nomorAntrian * 30));
-  //   String formattedTime = DateFormat('HH:mm').format(date);
-  //   return '${formattedTime}';
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -210,6 +198,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Image.asset(
                                     'assets/images/umum_ic.png',
                                     width: 46.w,
+                                    height: 46.h,
                                   ),
                                 ),
                                 TextHelper(
@@ -242,6 +231,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Image.asset(
                                     'assets/images/gigi_ic.png',
                                     width: 46.w,
+                                    height: 46.h,
                                   ),
                                 ),
                                 TextHelper(
@@ -274,6 +264,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Image.asset(
                                     'assets/images/bayi_ic.png',
                                     width: 46.w,
+                                    height: 46.h,
                                   ),
                                 ),
                                 TextHelper(
@@ -333,9 +324,9 @@ class _HomePageState extends State<HomePage> {
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             crossAxisCount: 2,
-                            mainAxisSpacing: 20,
-                            crossAxisSpacing: 20,
-                            childAspectRatio: 4 / 5.2,
+                            mainAxisSpacing: 12.h,
+                            crossAxisSpacing: 12.w,
+                            childAspectRatio: 4 / 5.5,
                             children: List.generate(
                               data.length <= 2 ? data.length : 2,
                               (index) {
@@ -355,79 +346,84 @@ class _HomePageState extends State<HomePage> {
                                     bgColor = Colors.grey;
                                 }
 
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      '/register_queue',
-                                      arguments: kirimData,
-                                    );
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 3,
-                                          blurRadius: 2,
-                                          offset: Offset(0, 4),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(20),
-                                          child: Container(
-                                            height: 50.h,
-                                            width: 50.w,
-                                            color: Colors.white,
-                                            child: Image.asset(
-                                              'assets/images/${data[index].jenis_layanan.toString().replaceAll(' ', '').toLowerCase()}_icon.png',
-                                              fit: BoxFit.contain,
+                                return Container(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/register_queue',
+                                        arguments: kirimData,
+                                      );
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 3,
+                                            blurRadius: 2,
+                                            offset: Offset(0, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(20),
+                                            child: Container(
+                                              height: 50.h,
+                                              width: 50.w,
+                                              color: Colors.white,
+                                              child: Image.asset(
+                                                'assets/images/${data[index].jenis_layanan.toString().replaceAll(' ', '').toLowerCase()}_icon.png',
+                                                fit: BoxFit.contain,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(height: 10.h),
-                                        TextHelper(
-                                          text: '${myDate(index)}',
-                                          fontSize: 15.sp,
-                                          fontColor: AppColors.grey,
-                                          fontFamily: FontFamily.regular,
-                                        ),
-                                        TextHelper(
-                                          text:
-                                              'Pelayanan ${data[index].jenis_layanan}',
-                                          fontSize: 16.sp,
-                                          fontFamily: FontFamily.bold,
-                                        ),
-                                        TextHelper(
-                                          // text: 'Jam ${time(index)}',
-                                          text: '${time(index)}',
-                                          fontSize: 16.sp,
-                                          fontFamily: FontFamily.semibold,
-                                        ),
-                                        SizedBox(height: 10.h),
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20.r)),
-                                          child: Container(
-                                              width: 120.w,
-                                              alignment: Alignment.center,
-                                              color: bgColor,
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: 4.h,
-                                              ),
-                                              child: TextHelper(
-                                                text: data[index].daftar_status,
-                                                fontSize: 14.sp,
-                                                fontFamily: FontFamily.bold,
-                                                fontColor: Colors.white,
-                                              )),
-                                        ),
-                                      ],
+                                          SizedBox(height: 10.h),
+                                          TextHelper(
+                                            text: '${myDate(index)}',
+                                            fontSize: 15.sp,
+                                            fontColor: AppColors.grey,
+                                            fontFamily: FontFamily.regular,
+                                          ),
+                                          TextHelper(
+                                            text:
+                                                'Pelayanan ${data[index].jenis_layanan}',
+                                            fontSize: 16.sp,
+                                            fontFamily: FontFamily.bold,
+                                          ),
+                                          TextHelper(
+                                            // text: 'Jam ${time(index)}',
+                                            text: '${time(index)}',
+                                            fontSize: 16.sp,
+                                            fontFamily: FontFamily.semibold,
+                                          ),
+                                          SizedBox(height: 10.h),
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20.r)),
+                                            child: Container(
+                                                width: 120.w,
+                                                alignment: Alignment.center,
+                                                color: bgColor,
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: 4.h,
+                                                ),
+                                                child: TextHelper(
+                                                  text:
+                                                      data[index].daftar_status,
+                                                  fontSize: 14.sp,
+                                                  fontFamily: FontFamily.bold,
+                                                  fontColor: Colors.white,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

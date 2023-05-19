@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:klinik_giri_husada/models/ModelPostRegister.dart';
 import 'package:klinik_giri_husada/models/UserModel.dart';
 import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 
@@ -45,21 +46,31 @@ class RegisterController {
       AwesomeWidget.warningDialog(context, 'Centang Persetujuan',
           'Klik centang jika anda menyetujui peraturan pada aplikasi ini.');
     } else {
-      UserModel.register(
-              context, nowa, sandi, 'mobile', nama, nik, gender, alamat)
-          .then((value) async {
-        if (value.status! >= 400) {
-          AwesomeWidget.errorDialog(
-              context, value.title.toString(), value.message.toString());
-        } else {
-          final storage = new FlutterSecureStorage();
-          String jsonString = json.encode(value.data!.toJson());
-          await storage.write(key: 'userdata', value: jsonString);
-          await storage.write(key: 'token', value: value.token);
-          await storage.write(key: 'logstatus', value: 'true');
-          Navigator.pushReplacementNamed(context, '/home');
-        }
-      });
+      ModelPostRegister model = ModelPostRegister(
+          context: context,
+          nowa: nowa,
+          sandi: sandi,
+          device: 'mobile',
+          nik: nik,
+          gender: gender,
+          alamat: alamat);
+      Navigator.pushNamed(context, '/verify_phone', arguments: model);
+
+      // UserModel.register(
+      //         context, nowa, sandi, 'mobile', nama, nik, gender, alamat)
+      //     .then((value) async {
+      //   if (value.status! >= 400) {
+      //     AwesomeWidget.errorDialog(
+      //         context, value.title.toString(), value.message.toString());
+      //   } else {
+      //     final storage = new FlutterSecureStorage();
+      //     String jsonString = json.encode(value.data!.toJson());
+      //     await storage.write(key: 'userdata', value: jsonString);
+      //     await storage.write(key: 'token', value: value.token);
+      //     await storage.write(key: 'logstatus', value: 'true');
+      //     Navigator.pushReplacementNamed(context, '/home');
+      //   }
+      // });
     }
   }
 }

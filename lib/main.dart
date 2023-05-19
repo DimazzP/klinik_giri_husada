@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/helpers/pcolor.dart';
+import 'package:klinik_giri_husada/views/change_gender.dart';
+import 'package:klinik_giri_husada/views/edit_password.dart';
 import 'package:klinik_giri_husada/views/edit_user.dart';
 import 'package:klinik_giri_husada/views/account.dart';
 import 'package:klinik_giri_husada/views/change_account.dart';
@@ -15,6 +17,7 @@ import 'package:klinik_giri_husada/views/register.dart';
 import 'package:klinik_giri_husada/views/splashscreen.dart';
 import 'package:klinik_giri_husada/views/success_cancel.dart';
 import 'package:klinik_giri_husada/views/success_queue.dart';
+import 'package:klinik_giri_husada/views/verify_phone.dart';
 
 void main() {
   WidgetsFlutterBinding();
@@ -55,6 +58,9 @@ class MyApp extends StatelessWidget {
             '/change_account': (context) => const ChangeAccount(),
             '/success_cancel': (context) => const SuccessCancel(),
             '/edit_user': (context) => EditUser(),
+            '/change_gender': (context) => const ChangeGender(),
+            '/edit_password': (context) => EditPassword(),
+            '/verify_phone': (context) => const VerifyPhone(),
           },
         );
       },

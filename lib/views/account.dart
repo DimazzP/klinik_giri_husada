@@ -8,6 +8,7 @@ import 'package:klinik_giri_husada/models/ModelEdit.dart';
 import 'package:klinik_giri_husada/models/ModelToken.dart';
 import 'package:klinik_giri_husada/models/UserModel.dart';
 import 'package:klinik_giri_husada/views/login.dart';
+import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 
 import '../helpers/FontFamily.dart';
@@ -41,20 +42,27 @@ class _AccountPageState extends State<AccountPage> {
     return Scaffold(
       backgroundColor: const Color(0xfff1f1f1),
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        title: Stack(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GestureDetector(
-              child: Icon(Icons.arrow_back_ios),
-              onTap: () {
-                Navigator.pop(context);
-              },
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                child: Icon(Icons.arrow_back_ios),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Akun Saya',
-                style: TextStyle(fontFamily: FontFamily.bold, fontSize: 20.sp),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Akun Saya',
+                  style:
+                      TextStyle(fontFamily: FontFamily.bold, fontSize: 20.sp),
+                ),
               ),
             ),
             Container(),
@@ -69,16 +77,16 @@ class _AccountPageState extends State<AccountPage> {
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: Column(
             children: [
-              SizedBox(height: 20.h),
+              SizedBox(height: 10.h),
               userData?.profile?.pasien_gender == 'P'
                   ? Image.asset(
                       'assets/images/womanavatar.png',
-                      width: 150.w,
-                      height: 150.h,
+                      width: 120.w,
+                      height: 120.h,
                     )
                   : Container(
-                      width: 150.w,
-                      height: 150.h,
+                      width: 120.w,
+                      height: 120.h,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: AppColors.grey3),
                       child: Image.asset('assets/images/boyavatar.png'),
@@ -91,7 +99,7 @@ class _AccountPageState extends State<AccountPage> {
                     borderRadius: BorderRadius.all(Radius.circular(30.r)),
                     color: Colors.white),
                 child: Column(children: [
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 8.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -118,7 +126,7 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                               IconButton(
                                   onPressed: () {},
-                                  icon: Icon(Icons.phone_android_outlined,
+                                  icon: Icon(Icons.phone_android_sharp,
                                       color: AppColors.primary))
                             ],
                           )),
@@ -129,7 +137,7 @@ class _AccountPageState extends State<AccountPage> {
                       height: 1,
                       width: double.infinity,
                       color: AppColors.grey2),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -176,7 +184,7 @@ class _AccountPageState extends State<AccountPage> {
                       height: 1,
                       width: double.infinity,
                       color: AppColors.grey2),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -223,7 +231,7 @@ class _AccountPageState extends State<AccountPage> {
                       height: 1,
                       width: double.infinity,
                       color: AppColors.grey2),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -253,7 +261,12 @@ class _AccountPageState extends State<AccountPage> {
                                         fontColor: AppColors.black)),
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, '/change_gender',
+                                        arguments:
+                                            '${userData?.profile?.pasien_gender}');
+                                  },
                                   icon: Icon(Icons.arrow_forward_ios,
                                       color: AppColors.primary))
                             ],
@@ -265,7 +278,7 @@ class _AccountPageState extends State<AccountPage> {
                       height: 1,
                       width: double.infinity,
                       color: AppColors.grey2),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -312,6 +325,53 @@ class _AccountPageState extends State<AccountPage> {
                       height: 1,
                       width: double.infinity,
                       color: AppColors.grey2),
+                  SizedBox(height: 10.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                          flex: 3,
+                          child: Container(
+                              child: TextHelper(
+                                  text: 'Password',
+                                  fontSize: 16.sp,
+                                  fontColor: AppColors.grey))),
+                      Flexible(
+                          flex: 7,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    alignment: Alignment.topRight,
+                                    child: TextHelper(
+                                        text: '••••••',
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 16.sp,
+                                        fontColor: AppColors.black)),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, '/edit_password',
+                                        arguments: ModelEdit(
+                                            valueCategory: 'Alamat',
+                                            myvalue: userData!
+                                                .profile!.pasien_alamat
+                                                .toString(),
+                                            idcategory: 4));
+                                  },
+                                  icon: Icon(Icons.arrow_forward_ios,
+                                      color: AppColors.primary))
+                            ],
+                          )),
+                    ],
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(top: 6.h),
+                      height: 1,
+                      width: double.infinity,
+                      color: AppColors.grey2),
                   SizedBox(height: 30.h),
                   Container(
                     child: ElevatedButton(
@@ -321,13 +381,15 @@ class _AccountPageState extends State<AccountPage> {
                               16.r), // Atur nilai sesuai kebutuhan
                         ),
                       ),
-                      onPressed: () async {
-                        final storage = FlutterSecureStorage();
-                        await storage.deleteAll();
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/login',
-                          (route) => false,
-                        );
+                      onPressed: () {
+                        AwesomeWidget.infoDialog(context, 'Keluar',
+                            'Apakah anda yakin untuk mengeluarkan akun dari perangkat anda?',
+                            () async {
+                          final storage = FlutterSecureStorage();
+                          await storage.deleteAll();
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/login', (route) => false);
+                        });
                       },
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -340,7 +402,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 8.h),
                 ]),
               )
             ],

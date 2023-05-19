@@ -16,24 +16,26 @@ import '../helpers/FontFamily.dart';
 import '../widgets/TextHelper.dart';
 import 'account.dart';
 
-class EditUser extends StatefulWidget {
+class EditPassword extends StatefulWidget {
   @override
-  State<EditUser> createState() => _EditUser();
+  State<EditPassword> createState() => _EditPassword();
 }
 
 // bool _passwordVisible = true;
+// bool _passwordVisible1 = true;
 // @override
 // void initState() {
 //   _passwordVisible = true;
+//   _passwordVisible1 = true;
 // }
 
-class _EditUser extends State<EditUser> {
+class _EditPassword extends State<EditPassword> {
   var _formKey = GlobalKey<FormState>();
-  bool _passwordVisible = true;
   TextEditingController cValue = TextEditingController();
   TextEditingController password = TextEditingController();
   bool? isNumber;
-  ModelEdit? model;
+  bool _passwordVisible = true;
+  bool _passwordVisible1 = true;
 
   void showCustomSnackbarContent(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -44,7 +46,7 @@ class _EditUser extends State<EditUser> {
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
           title: 'Berhasil',
-          message: '${model!.valueCategory.toString()} telah diubah)',
+          message: 'Password anda berhasil diubah.',
           contentType: ContentType.success,
         ),
         duration: Duration(seconds: 3),
@@ -58,12 +60,13 @@ class _EditUser extends State<EditUser> {
     super.initState();
     isNumber = false;
     _passwordVisible = true;
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      model = ModalRoute.of(context)!.settings.arguments as ModelEdit;
-      setState(() {
-        cValue.text = model!.myvalue.toString();
-      });
-    });
+    _passwordVisible1 = true;
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   model = ModalRoute.of(context)!.settings.arguments as ModelEdit;
+    //   setState(() {
+    //     cValue.text = model!.myvalue.toString();
+    //   });
+    // });
   }
 
   Widget build(BuildContext context) {
@@ -80,7 +83,7 @@ class _EditUser extends State<EditUser> {
               Padding(
                 padding: EdgeInsets.all(8.h),
                 child: Text(
-                  'Ubah ${model?.valueCategory}',
+                  'Ubah Password',
                   style:
                       TextStyle(fontFamily: FontFamily.bold, fontSize: 18.sp),
                 ),
@@ -105,7 +108,7 @@ class _EditUser extends State<EditUser> {
                     child: Align(
                       alignment: FractionalOffset.topLeft,
                       child: TextHelper(
-                        text: 'Ubah ${model?.valueCategory}',
+                        text: 'Password Baru',
                         fontSize: 14.sp,
                         fontColor: AppColors.grey,
                       ),
@@ -123,56 +126,42 @@ class _EditUser extends State<EditUser> {
                       child: Padding(
                         padding: EdgeInsets.only(top: 5.h),
                         child: Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.all(2),
-                          child: isNumber == true
-                              ? TextFormField(
-                                  controller: cValue,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                    LengthLimitingTextInputFormatter(16)
-                                  ],
-                                  validator: (value) {
-                                    if (value == null ||
-                                        value.toString().isEmpty) {
-                                      return '${model?.valueCategory} tidak boleh kosong';
-                                    }
+                            width: double.infinity,
+                            margin: EdgeInsets.all(2),
+                            child: TextFormField(
+                              controller: cValue,
+                              validator: (value) {
+                                if (value == null || value.toString().isEmpty) {
+                                  return 'Password baru tidak boleh kosong';
+                                } else if (value.length < 8) {
+                                  return 'Password minimal harus 8 karakter';
+                                }
+                              },
+                              obscureText: _passwordVisible1,
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _passwordVisible1 = !_passwordVisible1;
+                                    });
                                   },
-                                  cursorColor: Colors.black,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.grey.shade100,
-                                    contentPadding: EdgeInsets.fromLTRB(
-                                        10.w, 13.h, 10.w, 7.h),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(14.r),
-                                        borderSide: BorderSide(
-                                            color: Colors.grey.shade300)),
-                                  ),
-                                )
-                              : TextFormField(
-                                  controller: cValue,
-                                  validator: (value) {
-                                    if (value == null ||
-                                        value.toString().isEmpty) {
-                                      return '${model?.valueCategory} tidak boleh kosong';
-                                    }
-                                  },
-                                  cursorColor: Colors.black,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.grey.shade100,
-                                    contentPadding: EdgeInsets.fromLTRB(
-                                        10.w, 13.h, 10.w, 7.h),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(14.r),
-                                        borderSide: BorderSide(
-                                            color: Colors.grey.shade300)),
-                                  ),
+                                  icon: Icon(_passwordVisible1
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined),
+                                  color: Color.fromARGB(255, 143, 143, 143),
                                 ),
-                        ),
+                                suffixIconColor: Colors.black,
+                                hintText: 'Password Baru Minimal 8 Karakter',
+                                filled: true,
+                                fillColor: Colors.grey.shade100,
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(10.w, 13.h, 10.w, 7.h),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14.r),
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.shade300)),
+                              ),
+                            )),
                       ),
                     ),
                   ),
@@ -185,7 +174,7 @@ class _EditUser extends State<EditUser> {
                   child: Align(
                     alignment: FractionalOffset.topLeft,
                     child: TextHelper(
-                      text: "Password",
+                      text: "Password Lama",
                       fontSize: 16.sp,
                       fontColor: AppColors.grey,
                     ),
@@ -216,7 +205,7 @@ class _EditUser extends State<EditUser> {
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey.shade100,
-                                hintText: 'Masukkan Password Anda',
+                                hintText: 'Masukkan Password Lama',
                                 suffixIcon: IconButton(
                                   onPressed: () {
                                     setState(() {
@@ -256,12 +245,8 @@ class _EditUser extends State<EditUser> {
                           AwesomeWidget.infoDialog(context, 'Ubah Profil Anda',
                               'Apakah anda yakin untuk mengubah data akun anda? Klik OK untuk jika setuju.',
                               () {
-                            UserModel.ubahData(
-                                    context,
-                                    data.user_id.toString(),
-                                    password.text.toString(),
-                                    model!.idcategory.toString(),
-                                    cValue.text)
+                            UserModel.ubahData(context, data.user_id.toString(),
+                                    password.text.toString(), '5', cValue.text)
                                 .then((value) async {
                               if (value.status! >= 400) {
                                 Navigator.pop(context);

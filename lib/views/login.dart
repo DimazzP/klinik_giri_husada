@@ -186,7 +186,9 @@ class _LoginState extends State<Login> {
               SizedBox(height: 8.h),
               Container(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/verify_phone');
+                  },
                   child: TextHelper(
                     text: "Lupa Kata Sandi?",
                     fontSize: 16.sp,
