@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
+import 'package:klinik_giri_husada/models/ModelEdit.dart';
 import 'package:klinik_giri_husada/models/ModelOtp.dart';
 import 'package:klinik_giri_husada/models/ModelPostRegister.dart';
 import 'package:klinik_giri_husada/widgets/AppbarWidget.dart';
@@ -19,14 +20,14 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../models/UserModel.dart';
 import '../widgets/AwesomeDialogWidget.dart';
 
-class VerifyPhone extends StatefulWidget {
-  const VerifyPhone({super.key});
+class VerifyReset extends StatefulWidget {
+  const VerifyReset({super.key});
 
   @override
-  State<VerifyPhone> createState() => _VerifyPhoneState();
+  State<VerifyReset> createState() => _VerifyResetState();
 }
 
-class _VerifyPhoneState extends State<VerifyPhone> {
+class _VerifyResetState extends State<VerifyReset> {
   var _formKey = GlobalKey<FormState>();
   String? kode;
   String? randomString;
@@ -43,7 +44,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
   }
 
   bool? checkVerifikasi;
-  ModelPostRegister? model;
+  ModelEdit? model;
   @override
   void initState() {
     // TODO: implement initState
@@ -51,10 +52,10 @@ class _VerifyPhoneState extends State<VerifyPhone> {
     checkVerifikasi = true;
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       randomString = generateRandomString();
-      model = ModalRoute.of(context)!.settings.arguments as ModelPostRegister;
+      model = ModalRoute.of(context)!.settings.arguments as ModelEdit;
       setState(() {
         ModelOtp.sendOtp(
-            context, model!.nowa.toString(), randomString.toString());
+            context, model!.myvalue.toString(), randomString.toString());
         setState(() {
           checkVerifikasi = false;
         });
@@ -64,8 +65,6 @@ class _VerifyPhoneState extends State<VerifyPhone> {
 
   @override
   Widget build(BuildContext context) {
-    ModelPostRegister model =
-        ModalRoute.of(context)!.settings.arguments as ModelPostRegister;
     return Scaffold(
       backgroundColor: Color(0xffF1F1F1),
       appBar: AppbarWidget(
@@ -154,12 +153,11 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                               checkVerifikasi = true;
                             });
                             randomString = generateRandomString();
-                            ModelOtp.sendOtp(
-                                context, model.nowa, randomString.toString());
+                            ModelOtp.sendOtp(context, model!.myvalue.toString(),
+                                randomString.toString());
                             setState(() {
                               checkVerifikasi = false;
                             });
-                            // _sendOtp();
                           },
                           child: TextHelper(
                             text: 'Belum Mendapatkan Kode?',
@@ -177,42 +175,9 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               if (kode == randomString) {
-                                UserModel.register(
-                                        context,
-                                        model.nowa,
-                                        model.sandi,
-                                        'mobile',
-                                        model.nama,
-                                        model.nik,
-                                        model.gender,
-                                        model.alamat)
-                                    .then((value) async {
-                                  if (value.status! >= 400) {
-                                    AwesomeWidget.errorDialog(
-                                        context,
-                                        value.title.toString(),
-                                        value.message.toString());
-                                  } else {
-                                    final storage = new FlutterSecureStorage();
-                                    String jsonString =
-                                        json.encode(value.data!.toJson());
-                                    await storage.write(
-                                        key: 'userdata', value: jsonString);
-                                    await storage.write(
-                                        key: 'token', value: value.token);
-                                    await storage.write(
-                                        key: 'logstatus', value: 'true');
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            '/home', (route) => false);
-                                    AnimatedSnackBar.rectangle(
-                                      'Akun Berhasil Dibuat',
-                                      'Akun anda telah terdaftar pada layanan kami.',
-                                      type: AnimatedSnackBarType.success,
-                                      brightness: Brightness.light,
-                                    ).show(context);
-                                  }
-                                });
+                                Navigator.pushNamed(
+                                    context, '/reset_input_password',
+                                    arguments: model);
                               } else {
                                 AwesomeWidget.errorDialog(
                                     context,

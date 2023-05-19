@@ -51,7 +51,6 @@ class _ChangeGenderState extends State<ChangeGender> {
     }
 
     return InkWell(
-        // style: TextButton.styleFrom(backgroundColor: AppColors.grey3),
         onTap: () {
           setState(() {
             selectedIndex = index;
@@ -113,6 +112,7 @@ class _ChangeGenderState extends State<ChangeGender> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF1F1F1),
       appBar: AppBar(
           title: Row(
             children: [

@@ -68,6 +68,7 @@ class _EditUser extends State<EditUser> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF1F1F1),
       appBar: AppBar(
           title: Row(
             children: [

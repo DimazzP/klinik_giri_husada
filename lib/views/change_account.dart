@@ -17,6 +17,7 @@ class _ChangeAccountState extends State<ChangeAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF1F1F1),
       appBar: AppbarWidget(context: context, titleText: 'Ubah Akun'),
       body: SafeArea(
         child: Padding(

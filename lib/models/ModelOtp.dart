@@ -1,20 +1,33 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class ModelOtp {
-  static void sendOtp(String nomoHp, String randomNumber) async {
-    var token = "Rh8A_ZtcfAy8AEzZQLbY";
-    var url = 'https://api.fonnte.com/send';
+import '../widgets/AwesomeDialogWidget.dart';
 
-    var response = await http.post(
-      Uri.parse(url),
-      headers: {
-        "Authorization": token,
-      },
-      body: {
-        'target': nomoHp,
-        'message': "Kode Verifikasi Anda adalah $randomNumber",
-      },
-    );
-    print(response.body);
+class ModelOtp {
+  static sendOtp(
+      BuildContext context, String nomoHp, String randomNumber) async {
+    try {
+      var token = "Rh8A_ZtcfAy8AEzZQLbY";
+      var url = 'https://api.fonnte.com/send';
+
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {
+          "Authorization": token,
+        },
+        body: {
+          'target': nomoHp,
+          'message': "Kode Verifikasi Anda adalah $randomNumber",
+        },
+      );
+      var jsonResponse = json.decode(response.body);
+      return jsonResponse;
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('error saya $e');
+    }
   }
 }

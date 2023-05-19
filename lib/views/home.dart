@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
+        backgroundColor: Color(0xffF1F1F1),
         appBar: AppBar(
           title: FutureBuilder<String>(future: () async {
             final storage = new FlutterSecureStorage();

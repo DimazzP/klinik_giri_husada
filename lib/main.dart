@@ -8,16 +8,19 @@ import 'package:klinik_giri_husada/views/edit_password.dart';
 import 'package:klinik_giri_husada/views/edit_user.dart';
 import 'package:klinik_giri_husada/views/account.dart';
 import 'package:klinik_giri_husada/views/change_account.dart';
+import 'package:klinik_giri_husada/views/forgot_password.dart';
 // import 'package:klinik_giri_husada/views/bottom_view.dart';
 import 'package:klinik_giri_husada/views/history.dart';
 import 'package:klinik_giri_husada/views/home.dart';
 import 'package:klinik_giri_husada/views/login.dart';
 import 'package:klinik_giri_husada/views/queue_message.dart';
 import 'package:klinik_giri_husada/views/register.dart';
+import 'package:klinik_giri_husada/views/reset_input_password.dart';
 import 'package:klinik_giri_husada/views/splashscreen.dart';
 import 'package:klinik_giri_husada/views/success_cancel.dart';
 import 'package:klinik_giri_husada/views/success_queue.dart';
 import 'package:klinik_giri_husada/views/verify_phone.dart';
+import 'package:klinik_giri_husada/views/verify_reset.dart';
 
 void main() {
   WidgetsFlutterBinding();
@@ -61,6 +64,9 @@ class MyApp extends StatelessWidget {
             '/change_gender': (context) => const ChangeGender(),
             '/edit_password': (context) => EditPassword(),
             '/verify_phone': (context) => const VerifyPhone(),
+            '/verify_reset': (context) => const VerifyReset(),
+            '/forgot_password': (context) => const ForgotPassword(),
+            '/reset_input_password': (context) => const ResetInputPassword(),
           },
         );
       },

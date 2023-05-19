@@ -50,6 +50,7 @@ class RegisterController {
           context: context,
           nowa: nowa,
           sandi: sandi,
+          nama: nama,
           device: 'mobile',
           nik: nik,
           gender: gender,

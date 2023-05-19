@@ -18,6 +18,7 @@ class SuccessCancel extends StatelessWidget {
           return true;
         },
         child: Scaffold(
+          backgroundColor: Color(0xffF1F1F1),
           body: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

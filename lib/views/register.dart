@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
 import 'package:klinik_giri_husada/helpers/OkDialog.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
+import 'package:klinik_giri_husada/widgets/AppbarWidget.dart';
 import 'package:klinik_giri_husada/widgets/InputFieldForm.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,10 +36,9 @@ class _RegisterState extends State<Register> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: TextHelper(text: 'Mendaftarkan Akun', fontSize: 20.sp),
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: true,
+      appBar: AppbarWidget(
+        context: context,
+        titleText: 'Daftarkan Akun',
       ),
       body: SafeArea(
         child: Form(

@@ -187,7 +187,7 @@ class _LoginState extends State<Login> {
               Container(
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/verify_phone');
+                    Navigator.pushNamed(context, '/forgot_password');
                   },
                   child: TextHelper(
                     text: "Lupa Kata Sandi?",
