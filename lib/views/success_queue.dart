@@ -187,7 +187,7 @@ class _SuccessQueueState extends State<SuccessQueue> {
                       Visibility(
                         visible: checkStatus!,
                         child: Container(
-                          width: double.infinity,
+                          // width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.red),
@@ -195,10 +195,15 @@ class _SuccessQueueState extends State<SuccessQueue> {
                               QueueController.batalkan(
                                   context, daftarResponse.daftar_id.toString());
                             },
-                            child: TextHelper(
-                              text: 'Batalkan',
-                              fontSize: 20.sp,
-                              fontColor: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w, vertical: 4.h),
+                              child: TextHelper(
+                                text: 'Batalkan',
+                                fontSize: 20.sp,
+                                fontColor: Colors.white,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ),
@@ -235,7 +240,11 @@ Widget isiContain(String image, String title, String value) {
       margin: EdgeInsets.symmetric(vertical: 6.h),
       child: Row(
         children: [
-          Image.asset(image, height: 36.h),
+          Image.asset(
+            image,
+            height: 28.h,
+            width: 28.w,
+          ),
           Padding(
             padding: EdgeInsets.only(left: 12.w),
             child: Column(

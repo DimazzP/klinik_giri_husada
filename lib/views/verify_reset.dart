@@ -109,6 +109,7 @@ class _VerifyResetState extends State<VerifyReset> {
                         padding:
                             EdgeInsets.only(top: 16.h, left: 15.w, right: 15.w),
                         child: PinCodeTextField(
+                          keyboardType: TextInputType.number,
                           controller: otp,
                           appContext: context,
                           validator: (value2) {

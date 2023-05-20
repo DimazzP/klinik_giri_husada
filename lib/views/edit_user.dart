@@ -61,6 +61,9 @@ class _EditUser extends State<EditUser> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       model = ModalRoute.of(context)!.settings.arguments as ModelEdit;
       setState(() {
+        if (model!.idcategory == 2) {
+          isNumber = true;
+        }
         cValue.text = model!.myvalue.toString();
       });
     });
@@ -79,7 +82,7 @@ class _EditUser extends State<EditUser> {
                 },
               ),
               Padding(
-                padding: EdgeInsets.all(8.h),
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                 child: Text(
                   'Ubah ${model?.valueCategory}',
                   style:
@@ -128,6 +131,7 @@ class _EditUser extends State<EditUser> {
                           margin: EdgeInsets.all(2),
                           child: isNumber == true
                               ? TextFormField(
+                                  keyboardType: TextInputType.number,
                                   controller: cValue,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
@@ -137,6 +141,8 @@ class _EditUser extends State<EditUser> {
                                     if (value == null ||
                                         value.toString().isEmpty) {
                                       return '${model?.valueCategory} tidak boleh kosong';
+                                    } else if (value.toString().length < 16) {
+                                      return 'Jumlah NIK minimal 16 karakter';
                                     }
                                   },
                                   cursorColor: Colors.black,

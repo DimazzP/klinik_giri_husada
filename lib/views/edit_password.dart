@@ -46,7 +46,7 @@ class _EditPassword extends State<EditPassword> {
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
           title: 'Berhasil',
-          message: 'Password anda berhasil diubah.',
+          message: 'Kata sandi anda berhasil diubah',
           contentType: ContentType.success,
         ),
         duration: Duration(seconds: 3),
@@ -61,12 +61,6 @@ class _EditPassword extends State<EditPassword> {
     isNumber = false;
     _passwordVisible = true;
     _passwordVisible1 = true;
-    // WidgetsBinding.instance!.addPostFrameCallback((_) {
-    //   model = ModalRoute.of(context)!.settings.arguments as ModelEdit;
-    //   setState(() {
-    //     cValue.text = model!.myvalue.toString();
-    //   });
-    // });
   }
 
   Widget build(BuildContext context) {
@@ -84,7 +78,7 @@ class _EditPassword extends State<EditPassword> {
               Padding(
                 padding: EdgeInsets.all(8.h),
                 child: Text(
-                  'Ubah Password',
+                  'Ubah Kata Sandi',
                   style:
                       TextStyle(fontFamily: FontFamily.bold, fontSize: 18.sp),
                 ),
@@ -109,7 +103,7 @@ class _EditPassword extends State<EditPassword> {
                     child: Align(
                       alignment: FractionalOffset.topLeft,
                       child: TextHelper(
-                        text: 'Password Baru',
+                        text: 'Kata Sandi Baru',
                         fontSize: 14.sp,
                         fontColor: AppColors.grey,
                       ),
@@ -133,9 +127,9 @@ class _EditPassword extends State<EditPassword> {
                               controller: cValue,
                               validator: (value) {
                                 if (value == null || value.toString().isEmpty) {
-                                  return 'Password baru tidak boleh kosong';
+                                  return 'Kata sandi baru tidak boleh kosong';
                                 } else if (value.length < 8) {
-                                  return 'Password minimal harus 8 karakter';
+                                  return 'Kata sandi minimal harus 8 karakter';
                                 }
                               },
                               obscureText: _passwordVisible1,
@@ -152,7 +146,7 @@ class _EditPassword extends State<EditPassword> {
                                   color: Color.fromARGB(255, 143, 143, 143),
                                 ),
                                 suffixIconColor: Colors.black,
-                                hintText: 'Password Baru Minimal 8 Karakter',
+                                hintText: 'Kata Sandi Baru Minimal 8 Karakter',
                                 filled: true,
                                 fillColor: Colors.grey.shade100,
                                 contentPadding:
@@ -175,7 +169,7 @@ class _EditPassword extends State<EditPassword> {
                   child: Align(
                     alignment: FractionalOffset.topLeft,
                     child: TextHelper(
-                      text: "Password Lama",
+                      text: "Kata Sandi Lama",
                       fontSize: 16.sp,
                       fontColor: AppColors.grey,
                     ),
@@ -200,13 +194,13 @@ class _EditPassword extends State<EditPassword> {
                               cursorColor: Colors.black,
                               validator: (value) {
                                 if (value == null || value.toString().isEmpty) {
-                                  return 'Password tidak boleh kosong';
+                                  return 'Kata sandi tidak boleh kosong';
                                 }
                               },
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey.shade100,
-                                hintText: 'Masukkan Password Lama',
+                                hintText: 'Masukkan Kata Sandi Lama',
                                 suffixIcon: IconButton(
                                   onPressed: () {
                                     setState(() {

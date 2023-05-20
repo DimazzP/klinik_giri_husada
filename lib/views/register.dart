@@ -83,6 +83,7 @@ class _RegisterState extends State<Register> {
                             height: heightTop,
                             child: InputFieldForm(
                               ctrl: tNik,
+                              keyboardType: TextInputType.number,
                               error: 'NIK tidak boleh kosong',
                               placeholder: 'Nomor KTP',
                               hintText: 'Masukkan 16 angka',
@@ -103,6 +104,7 @@ class _RegisterState extends State<Register> {
                               hintText: 'Masukkan 12-13 angka',
                               error: 'Nomor whatsapp tidak boleh kosong',
                               placeholder: 'Nomor Whatsapp',
+                              keyboardType: TextInputType.phone,
                               inputFormatter: [
                                 FilteringTextInputFormatter.digitsOnly,
                                 LengthLimitingTextInputFormatter(13),

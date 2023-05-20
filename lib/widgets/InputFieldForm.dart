@@ -16,6 +16,7 @@ class InputFieldForm extends StatelessWidget {
     this.error2,
     this.minimumLength,
     this.inputFormatter,
+    this.keyboardType,
     Key? key,
   }) : super(key: key);
   final TextEditingController ctrl;
@@ -25,6 +26,7 @@ class InputFieldForm extends StatelessWidget {
   int? minimumLength = 1;
   String? hintText = '';
   final List<TextInputFormatter>? inputFormatter;
+  TextInputType? keyboardType = TextInputType.text;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class InputFieldForm extends StatelessWidget {
     }
     return TextFormField(
       controller: ctrl,
+      keyboardType: keyboardType,
       validator: (value) {
         if (value.toString().isEmpty) {
           return error;
