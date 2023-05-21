@@ -17,7 +17,7 @@ class ResetPasswordModel {
 
   static Map<String, String> getToken(String token) {
     return {
-      'Authorization': 'Bearer 1|3fonVUzITkFo1sdnWpkXAux5Don6LGYf8V2xZiD6',
+      'Authorization': 'Bearer $token',
     };
   }
 
@@ -36,20 +36,21 @@ class ResetPasswordModel {
 
   static Future<ResetPasswordModel> ubahPassword(
       BuildContext context, String nowa, String password, String token) async {
-    // try {
-    Uri url = Uri.parse(Apihelper.url + 'reset/password/nomor/ubah');
-    var response = await http
-        .post(url, headers: ResetPasswordModel.getToken(token), body: {
-      'user_nowa': nowa,
-      'password': password,
-    });
-    var data = json.decode(response.body);
-    return ResetPasswordModel.fromJson(data);
-    // } catch (e) {
-    //   AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
-    //       'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
-    //   throw Exception('error saya $e');
-    // }
+    try {
+      print(token.toString() + 'ini token lagi');
+      Uri url = Uri.parse(Apihelper.url + 'reset/password/nomor/ubah');
+      var response = await http
+          .post(url, headers: ResetPasswordModel.getToken(token), body: {
+        'user_nowa': nowa,
+        'password': password,
+      });
+      var data = json.decode(response.body);
+      return ResetPasswordModel.fromJson(data);
+    } catch (e) {
+      AwesomeWidget.errorDialog(context, 'Terjadi Kesalahan',
+          'Mohon maaf, proses yang Anda lakukan gagal. Mohon untuk mengulang proses tersebut atau tunggu sejenak untuk mencoba kembali.');
+      throw Exception('error saya $e');
+    }
   }
 
   static Future<ResetPasswordModel> checkNomor(

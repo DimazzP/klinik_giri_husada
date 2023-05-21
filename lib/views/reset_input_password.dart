@@ -156,7 +156,7 @@ class _ResetInputPasswordState extends State<ResetInputPassword> {
                       if (value.toString().isEmpty) {
                         return "Masukkan Kata Sandi";
                       } else if (value.toString().length < 8) {
-                        return 'Konfirmasi kata sandi';
+                        return 'Kata sandi minimal 8 huruf';
                       }
                     },
                     decoration: InputDecoration(
@@ -185,6 +185,8 @@ class _ResetInputPasswordState extends State<ResetInputPassword> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            print('ini nomor' + model!.myvalue.toString());
+                            ;
                             if (tSandi!.text != tKonfirm.text) {
                               AwesomeWidget.errorDialog(
                                   context,

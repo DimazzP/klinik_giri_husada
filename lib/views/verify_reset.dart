@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -109,6 +110,9 @@ class _VerifyResetState extends State<VerifyReset> {
                         padding:
                             EdgeInsets.only(top: 16.h, left: 15.w, right: 15.w),
                         child: PinCodeTextField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                           keyboardType: TextInputType.number,
                           controller: otp,
                           appContext: context,

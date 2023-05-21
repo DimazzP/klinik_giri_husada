@@ -50,7 +50,7 @@ class DaftarModel {
     try {
       final Future<Map<String, String>> myToken = ModelToken.getToken();
       UserResponse myObject = await ModelToken.getUserData();
-      String idPasien = myObject.user_id.toString();
+      String idPasien = myObject.profile!.pasien_id.toString();
       Uri url = Uri.parse(Apihelper.url + 'daftar/pasien/$idPasien');
       var response = await http.get(url, headers: await ModelToken.getToken());
       var body = json.decode(response.body);
@@ -66,7 +66,7 @@ class DaftarModel {
       BuildContext context, String tanggal, String idjenis) async {
     try {
       UserResponse userdata = await ModelToken.getUserData();
-      String idPasien = userdata.user_id.toString();
+      String idPasien = userdata.profile!.pasien_id.toString();
       Uri url = Uri.parse(Apihelper.url +
           'daftar/jam/pasien/$idPasien/tanggal/$tanggal/layanan/$idjenis');
       var response = await http.get(url, headers: await ModelToken.getToken());
@@ -83,7 +83,7 @@ class DaftarModel {
       BuildContext context, String iddaftar) async {
     try {
       UserResponse userdata = await ModelToken.getUserData();
-      String idPasien = userdata.user_id.toString();
+      String idPasien = userdata.profile!.pasien_id.toString();
       Uri url = Uri.parse(Apihelper.url + 'daftar/batal/$iddaftar');
       var response = await http.put(url, headers: await ModelToken.getToken());
       var body = json.decode(response.body);

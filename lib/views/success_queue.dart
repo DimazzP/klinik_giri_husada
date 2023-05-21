@@ -124,9 +124,7 @@ class _SuccessQueueState extends State<SuccessQueue> {
                               height: 40.h),
                         ],
                       ),
-                      SizedBox(
-                        height: 4,
-                      ),
+                      SizedBox(height: 4),
                       Container(
                         alignment: Alignment.topLeft,
                         child: Padding(

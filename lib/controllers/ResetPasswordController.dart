@@ -11,6 +11,7 @@ class ResetPasswordController {
             valueCategory: value.token.toString(),
             myvalue: nowa,
             idcategory: 1);
+        // print(value.token.toString() + ' ini token saya');
         Navigator.pushNamed(context, '/verify_reset', arguments: model);
       } else if (value.status == 400) {
         AwesomeWidget.errorDialog(

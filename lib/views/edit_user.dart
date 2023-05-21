@@ -33,6 +33,7 @@ class _EditUser extends State<EditUser> {
   TextEditingController cValue = TextEditingController();
   TextEditingController password = TextEditingController();
   bool? isNumber;
+  bool? isName;
   ModelEdit? model;
 
   void showCustomSnackbarContent(BuildContext context) {
@@ -57,10 +58,14 @@ class _EditUser extends State<EditUser> {
     // TODO: implement initState
     super.initState();
     isNumber = false;
+    isName = false;
     _passwordVisible = true;
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       model = ModalRoute.of(context)!.settings.arguments as ModelEdit;
       setState(() {
+        if (model!.idcategory == 1) {
+          isName = true;
+        }
         if (model!.idcategory == 2) {
           isNumber = true;
         }
@@ -166,6 +171,12 @@ class _EditUser extends State<EditUser> {
                                       return '${model?.valueCategory} tidak boleh kosong';
                                     }
                                   },
+                                  inputFormatters: isName == true
+                                      ? <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp(r'[a-zA-Z\s]')),
+                                        ]
+                                      : null,
                                   cursorColor: Colors.black,
                                   decoration: InputDecoration(
                                     filled: true,
