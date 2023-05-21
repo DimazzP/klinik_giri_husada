@@ -77,6 +77,10 @@ class _RegisterState extends State<Register> {
                               ctrl: tName,
                               error: 'Nama tidak boleh kosong',
                               placeholder: 'Nama Lengkap',
+                              inputFormatter: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[a-zA-Z\s]')),
+                              ],
                             )),
                         //c2
                         Container(

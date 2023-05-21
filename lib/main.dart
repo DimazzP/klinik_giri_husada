@@ -7,7 +7,6 @@ import 'package:klinik_giri_husada/views/change_gender.dart';
 import 'package:klinik_giri_husada/views/edit_password.dart';
 import 'package:klinik_giri_husada/views/edit_user.dart';
 import 'package:klinik_giri_husada/views/account.dart';
-import 'package:klinik_giri_husada/views/change_account.dart';
 import 'package:klinik_giri_husada/views/forgot_password.dart';
 // import 'package:klinik_giri_husada/views/bottom_view.dart';
 import 'package:klinik_giri_husada/views/history.dart';
@@ -58,7 +57,6 @@ class MyApp extends StatelessWidget {
             '/register_queue': (context) => const SuccessQueue(),
             '/account': (context) => const AccountPage(),
             '/history': (context) => const HistoryPage(),
-            '/change_account': (context) => const ChangeAccount(),
             '/success_cancel': (context) => const SuccessCancel(),
             '/edit_user': (context) => EditUser(),
             '/change_gender': (context) => const ChangeGender(),
