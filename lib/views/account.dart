@@ -395,7 +395,7 @@ class _AccountPageState extends State<AccountPage> {
                         padding: EdgeInsets.symmetric(
                             vertical: 8.h, horizontal: 16.w),
                         child: TextHelper(
-                          text: 'Log Out',
+                          text: 'Keluar',
                           fontSize: 20.sp,
                           fontColor: Colors.white,
                         ),
