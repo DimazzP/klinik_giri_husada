@@ -22,6 +22,10 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage>
     with SingleTickerProviderStateMixin {
   void tampilkanData() async {
+    data = [];
+    dataBatal = [];
+    dataBerlangsung = [];
+    dataSelesai = [];
     DaftarModel.tampilDaftar(context).then((value) {
       data = value.data!;
       for (var i = 0; i < data.length; i++) {
@@ -34,6 +38,12 @@ class _HistoryPageState extends State<HistoryPage>
         }
       }
       setState(() {});
+    });
+  }
+
+  void changeValue() {
+    setState(() {
+      tampilkanData();
     });
   }
 
@@ -59,61 +69,72 @@ class _HistoryPageState extends State<HistoryPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xfff1f1f1),
-      appBar: AppBar(
-        title: Row(
-          children: [
-            GestureDetector(
-              child: Icon(Icons.arrow_back_ios),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Riwayat Pendaftaran',
-                style: TextStyle(fontFamily: FontFamily.bold, fontSize: 18.sp),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (route) => false);
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: Color(0xfff1f1f1),
+        appBar: AppBar(
+          title: Row(
+            children: [
+              GestureDetector(
+                child: Icon(Icons.arrow_back_ios),
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil('/home', (route) => false);
+                  // Navigator.pop(context, 'refresh');
+                },
               ),
-            ),
-          ],
-        ),
-        elevation: 0,
-        backgroundColor: Color(0xffFFFFFF),
-        automaticallyImplyLeading: false,
-      ),
-      body: DefaultTabController(
-        length: myTab.length, // Jumlah tab
-        initialIndex: 0,
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              child: TabBar(
-                isScrollable: true,
-                indicatorColor: AppColors.primary,
-                labelColor: AppColors.primary,
-                labelPadding: EdgeInsets.zero,
-                unselectedLabelStyle: TextStyle(fontFamily: FontFamily.bold),
-                unselectedLabelColor: AppColors.grey,
-                tabs: myTab,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.symmetric(vertical: 16.h),
-                child: TabBarView(
-                  children: [
-                    ListHistory(myData: data),
-                    ListHistory(myData: dataBerlangsung),
-                    ListHistory(myData: dataSelesai),
-                    ListHistory(myData: dataBatal),
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Riwayat Pendaftaran',
+                  style:
+                      TextStyle(fontFamily: FontFamily.bold, fontSize: 18.sp),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          elevation: 0,
+          backgroundColor: Color(0xffFFFFFF),
+          automaticallyImplyLeading: false,
+        ),
+        body: DefaultTabController(
+          length: myTab.length, // Jumlah tab
+          initialIndex: 0,
+          child: Column(
+            children: [
+              Container(
+                color: Colors.white,
+                child: TabBar(
+                  isScrollable: true,
+                  indicatorColor: AppColors.primary,
+                  labelColor: AppColors.primary,
+                  labelPadding: EdgeInsets.zero,
+                  unselectedLabelStyle: TextStyle(fontFamily: FontFamily.bold),
+                  unselectedLabelColor: AppColors.grey,
+                  tabs: myTab,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 16.h),
+                  child: TabBarView(
+                    children: [
+                      ListHistory(myData: data, onClick: changeValue),
+                      ListHistory(
+                          myData: dataBerlangsung, onClick: changeValue),
+                      ListHistory(myData: dataSelesai, onClick: changeValue),
+                      ListHistory(myData: dataBatal, onClick: changeValue),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -124,6 +145,7 @@ List<Tab> myTab = [
   Tab(
     child: Container(
       constraints: BoxConstraints(minWidth: 100.w),
+      margin: EdgeInsets.symmetric(horizontal: 4.w),
 
       // width: 100.w,
       alignment: Alignment.center,
@@ -136,9 +158,8 @@ List<Tab> myTab = [
   ),
   Tab(
     child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 4.w),
       constraints: BoxConstraints(minWidth: 100.w),
-
-      // width: 100.w,
       alignment: Alignment.center,
       child: Wrap(
         children: [
@@ -162,7 +183,8 @@ List<Tab> myTab = [
   ),
   Tab(
     child: Container(
-      constraints: BoxConstraints(minWidth: 10.w),
+      constraints: BoxConstraints(minWidth: 100.w),
+      margin: EdgeInsets.symmetric(horizontal: 4.w),
 
       // width: 100.w,
       alignment: Alignment.center,
@@ -188,6 +210,8 @@ List<Tab> myTab = [
   ),
   Tab(
     child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 4.w),
+
       constraints: BoxConstraints(minWidth: 100.w),
       // width: 100.w,
       alignment: Alignment.center,
@@ -215,8 +239,9 @@ List<Tab> myTab = [
 
 class ListHistory extends StatefulWidget {
   List<DaftarResponse> myData;
+  VoidCallback onClick;
 
-  ListHistory({required this.myData});
+  ListHistory({required this.myData, required this.onClick});
 
   @override
   State<ListHistory> createState() => _ListHistoryState();
@@ -303,10 +328,19 @@ class _ListHistoryState extends State<ListHistory> {
                     margin: EdgeInsets.all(5.sp),
                     child: ListTile(
                       onTap: () {
-                        setState(() {
+                        setState(() async {
                           DaftarResponse kirimData = widget.myData[index];
-                          Navigator.pushNamed(context, '/register_queue',
-                              arguments: kirimData);
+                          var refresh = await Navigator.pushNamed(
+                            context,
+                            '/register_queue',
+                            arguments: kirimData,
+                          );
+                          print('sudah refresh kah ? ' + refresh.toString());
+                          if (refresh == 'refresh') {
+                            widget.onClick();
+                          }
+                          // Navigator.pushNamed(context, '/register_queue',
+                          //     arguments: kirimData);
                         });
                       },
                       leading: Container(

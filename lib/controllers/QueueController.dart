@@ -19,7 +19,8 @@ class QueueController {
         if (value.status! >= 400) {
           AwesomeWidget.errorDialog(context, value.title!, value.message!);
         } else {
-          Navigator.pushReplacementNamed(context, '/register_queue',
+          Navigator.pop(context, 'refresh');
+          Navigator.pushNamed(context, '/register_queue',
               arguments: value.data![0]);
           // new OkDialog(context, value.title!, value.message!);
         }
@@ -31,12 +32,12 @@ class QueueController {
     AwesomeWidget.infoDialog(context, 'Batalkan Pesanan',
         'Nomor antrian anda akan dihapus jika anda membatalkan pendaftaran anda.',
         () {
+      Navigator.pop(context);
       DaftarModel.batalkan(context, idDaftar).then((value) {
         if (value.status! >= 400) {
           AwesomeWidget.errorDialog(context, value.title!, value.message!);
         } else {
-          Navigator.pop(context);
-          Navigator.pop(context);
+          Navigator.pop(context, 'refresh');
           Navigator.pushNamed(context, '/success_cancel');
         }
       });

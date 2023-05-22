@@ -9,7 +9,7 @@ class ModelOtp {
   static sendOtp(
       BuildContext context, String nomoHp, String randomNumber) async {
     try {
-      var token = "Rh8A_ZtcfAy8AEzZQLbY";
+      var token = "wX2hw7x_y18n1XXHBg_K";
       var url = 'https://api.fonnte.com/send';
 
       var response = await http.post(

@@ -37,7 +37,6 @@ class ResetPasswordModel {
   static Future<ResetPasswordModel> ubahPassword(
       BuildContext context, String nowa, String password, String token) async {
     try {
-      print(token.toString() + 'ini token lagi');
       Uri url = Uri.parse(Apihelper.url + 'reset/password/nomor/ubah');
       var response = await http
           .post(url, headers: ResetPasswordModel.getToken(token), body: {

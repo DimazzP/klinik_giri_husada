@@ -13,8 +13,9 @@ class SuccessCancel extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('/home', (route) => false);
+          // Navigator.of(context)
+          //     .pushNamedAndRemoveUntil('/home', (route) => false);
+          Navigator.pop(context, 'refresh');
           return true;
         },
         child: Scaffold(
@@ -40,19 +41,23 @@ class SuccessCancel extends StatelessWidget {
                   fontColor: AppColors.grey,
                 ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 32.h),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 14.w),
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil('/home', (route) => false);
+                      Navigator.pop(context, 'refresh');
+                      // Navigator.of(context)
+                      //     .pushNamedAndRemoveUntil('/home', (route) => false);
                     },
-                    child: TextHelper(
-                      text: 'Kembali',
-                      fontSize: 18.sp,
-                      fontColor: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      child: TextHelper(
+                        text: 'Kembali',
+                        fontSize: 20.sp,
+                        fontColor: Colors.white,
+                      ),
                     )),
               )
             ],

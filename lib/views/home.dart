@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
 import 'package:klinik_giri_husada/helpers/OkDialog.dart';
 import 'package:klinik_giri_husada/models/LayananModel.dart';
+import 'package:klinik_giri_husada/views/success_queue.dart';
 import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +27,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<DaftarResponse> data = [];
+  bool checkValue = false;
 
   void tampilkanData() async {
     DaftarModel.tampilDaftar(context).then((value) {
@@ -38,6 +40,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     tampilkanData();
+  }
+
+  void changeValue() {
+    setState(() {
+      tampilkanData();
+    });
   }
 
   @override
@@ -181,9 +189,17 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/queue',
-                                arguments: 1);
+                          onPressed: () async {
+                            var refresh = await Navigator.pushNamed(
+                              context,
+                              '/queue',
+                              arguments: 1,
+                            );
+                            if (refresh == 'refresh') {
+                              changeValue();
+                            }
+                            // Navigator.pushNamed(context, '/queue',
+                            //     arguments: 1);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -214,9 +230,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                         //! gigi
                         ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/queue',
-                                arguments: 2);
+                          onPressed: () async {
+                            var refresh = await Navigator.pushNamed(
+                              context,
+                              '/queue',
+                              arguments: 2,
+                            );
+                            if (refresh == 'refresh') {
+                              changeValue();
+                            }
+                            // Navigator.pushNamed(context, '/queue',
+                            //     arguments: 2);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -247,9 +271,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                         //! ibu & anak
                         ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/queue',
-                                arguments: 3);
+                          onPressed: () async {
+                            var refresh = await Navigator.pushNamed(
+                              context,
+                              '/queue',
+                              arguments: 3,
+                            );
+                            if (refresh == 'refresh') {
+                              changeValue();
+                            }
+                            // Navigator.pushNamed(context, '/queue',
+                            //     arguments: 3);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -349,12 +381,15 @@ class _HomePageState extends State<HomePage> {
 
                                 return Container(
                                   child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.pushNamed(
+                                    onTap: () async {
+                                      var refresh = await Navigator.pushNamed(
                                         context,
                                         '/register_queue',
                                         arguments: kirimData,
                                       );
+                                      if (refresh == 'refresh') {
+                                        changeValue();
+                                      }
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(

@@ -42,15 +42,13 @@ class _SuccessQueueState extends State<SuccessQueue> {
     String time() {
       DateFormat myFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
       DateTime date = myFormat.parse(daftarResponse.daftar_tanggal!);
-      print('aku test $date');
       String formattedTime = DateFormat('HH:mm').format(date);
       return '${formattedTime}';
     }
 
     return WillPopScope(
         onWillPop: () async {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('/home', (route) => false);
+          Navigator.pop(context, 'refresh');
           return true;
         },
         child: Scaffold(
@@ -217,8 +215,9 @@ class _SuccessQueueState extends State<SuccessQueue> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/home', (route) => false);
+                  Navigator.pop(context, 'refresh');
+                  // Navigator.of(context)
+                  //     .pushNamedAndRemoveUntil('/home', (route) => false);
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.h),
