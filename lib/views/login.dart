@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../helpers/FontFamily.dart';
 import '../helpers/colorThemes.dart';
@@ -28,7 +27,7 @@ class _LoginState extends State<Login> {
     String _deviceName = '';
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xfff1f1f1),
       body: SafeArea(
         child: Form(
@@ -98,6 +97,7 @@ class _LoginState extends State<Login> {
                     if (value.toString().isEmpty) {
                       return "Masukkan Nomor Anda";
                     }
+                    return null;
                   },
                   keyboardType: TextInputType.phone,
                   inputFormatters: [

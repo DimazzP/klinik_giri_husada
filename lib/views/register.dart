@@ -48,6 +48,7 @@ class _RegisterState extends State<Register> {
               child: Stack(
                 children: [
                   SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     child: Column(
                       children: [
                         SizedBox(

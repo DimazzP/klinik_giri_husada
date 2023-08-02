@@ -17,7 +17,6 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     // TODO: implement initState
-    // fetchData();
     Future.delayed(Duration(milliseconds: 3000), () {
       fetchData();
     });

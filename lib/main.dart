@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      useInheritedMediaQuery: true,
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
               primaryColor: AppColors.primary,
               primarySwatch: Palette.pcolor,
               fontFamily: 'nunito-sm'),
-          home: Splashscreen(),
+          home: child,
           routes: {
             '/splashscreen': (context) => Splashscreen(),
             '/login': (context) => const Login(),
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
           },
         );
       },
+      child: const Splashscreen(),
     );
   }
 }
