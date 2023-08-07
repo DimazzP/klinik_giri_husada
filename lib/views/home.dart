@@ -1,21 +1,13 @@
 import 'dart:convert';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
-import 'package:klinik_giri_husada/helpers/OkDialog.dart';
-import 'package:klinik_giri_husada/models/LayananModel.dart';
-import 'package:klinik_giri_husada/views/success_queue.dart';
-import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../helpers/FontSize.dart';
 import '../helpers/colorThemes.dart';
 import '../models/DaftarModel.dart';
 import '../models/UserModel.dart';
-import '../widgets/MenuWidget.dart';
 import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {

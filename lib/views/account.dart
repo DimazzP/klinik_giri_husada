@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/models/ModelEdit.dart';
 import 'package:klinik_giri_husada/models/ModelToken.dart';
 import 'package:klinik_giri_husada/models/UserModel.dart';
-import 'package:klinik_giri_husada/views/login.dart';
 import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 

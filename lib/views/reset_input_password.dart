@@ -1,11 +1,8 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/models/ModelEdit.dart';
-import 'package:klinik_giri_husada/widgets/AppbarWidget.dart';
 import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 
@@ -35,7 +32,6 @@ class _ResetInputPasswordState extends State<ResetInputPassword> {
     obscure2 = true;
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       model = ModalRoute.of(context)!.settings.arguments as ModelEdit;
-      print(model!.valueCategory);
     });
   }
 

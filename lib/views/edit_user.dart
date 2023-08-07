@@ -9,14 +9,14 @@ import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/models/ModelEdit.dart';
 import 'package:klinik_giri_husada/models/ModelToken.dart';
 import 'package:klinik_giri_husada/models/UserModel.dart';
-import 'package:klinik_giri_husada/widgets/AppbarWidget.dart';
 import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 
 import '../helpers/FontFamily.dart';
 import '../widgets/TextHelper.dart';
-import 'account.dart';
 
 class EditUser extends StatefulWidget {
+  const EditUser({super.key});
+
   @override
   State<EditUser> createState() => _EditUser();
 }
@@ -40,7 +40,7 @@ class _EditUser extends State<EditUser> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         elevation: 0,
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         behavior: SnackBarBehavior.fixed,
         backgroundColor: Colors.transparent,
         content: AwesomeSnackbarContent(
@@ -48,7 +48,7 @@ class _EditUser extends State<EditUser> {
           message: '${model!.valueCategory.toString()} telah diubah)',
           contentType: ContentType.success,
         ),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -149,6 +149,7 @@ class _EditUser extends State<EditUser> {
                                     } else if (value.toString().length < 16) {
                                       return 'Jumlah NIK minimal 16 karakter';
                                     }
+                                    return null;
                                   },
                                   cursorColor: Colors.black,
                                   decoration: InputDecoration(
@@ -170,6 +171,7 @@ class _EditUser extends State<EditUser> {
                                         value.toString().isEmpty) {
                                       return '${model?.valueCategory} tidak boleh kosong';
                                     }
+                                    return null;
                                   },
                                   inputFormatters: isName == true
                                       ? <TextInputFormatter>[
@@ -230,6 +232,7 @@ class _EditUser extends State<EditUser> {
                                 if (value == null || value.toString().isEmpty) {
                                   return 'Password tidak boleh kosong';
                                 }
+                                return null;
                               },
                               decoration: InputDecoration(
                                 filled: true,

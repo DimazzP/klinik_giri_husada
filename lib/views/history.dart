@@ -1,16 +1,10 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
 import 'package:klinik_giri_husada/models/DaftarModel.dart';
-import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 import 'package:klinik_giri_husada/widgets/TextHelper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../helpers/colorThemes.dart';
-import '../models/PatientModel.dart';
-import '../widgets/AppbarWidget.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});

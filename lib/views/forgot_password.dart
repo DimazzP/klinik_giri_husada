@@ -1,11 +1,7 @@
-import 'dart:math';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
-import 'package:klinik_giri_husada/controllers/LoginController.dart';
 import 'package:klinik_giri_husada/controllers/ResetPasswordController.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';

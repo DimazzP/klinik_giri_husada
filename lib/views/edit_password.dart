@@ -2,19 +2,15 @@ import 'dart:convert';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
-import 'package:klinik_giri_husada/models/ModelEdit.dart';
 import 'package:klinik_giri_husada/models/ModelToken.dart';
 import 'package:klinik_giri_husada/models/UserModel.dart';
-import 'package:klinik_giri_husada/widgets/AppbarWidget.dart';
 import 'package:klinik_giri_husada/widgets/AwesomeDialogWidget.dart';
 
 import '../helpers/FontFamily.dart';
 import '../widgets/TextHelper.dart';
-import 'account.dart';
 
 class EditPassword extends StatefulWidget {
   @override
@@ -131,6 +127,7 @@ class _EditPassword extends State<EditPassword> {
                                 } else if (value.length < 8) {
                                   return 'Kata sandi minimal harus 8 karakter';
                                 }
+                                return null;
                               },
                               obscureText: _passwordVisible1,
                               decoration: InputDecoration(
@@ -196,6 +193,7 @@ class _EditPassword extends State<EditPassword> {
                                 if (value == null || value.toString().isEmpty) {
                                   return 'Kata sandi tidak boleh kosong';
                                 }
+                                return null;
                               },
                               decoration: InputDecoration(
                                 filled: true,

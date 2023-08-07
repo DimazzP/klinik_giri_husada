@@ -27,7 +27,6 @@ class _LoginState extends State<Login> {
     String _deviceName = '';
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xfff1f1f1),
       body: SafeArea(
         child: Form(

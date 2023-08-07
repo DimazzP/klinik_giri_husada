@@ -2,15 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:klinik_giri_husada/controllers/QueueController.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
-import 'package:klinik_giri_husada/helpers/OkDialog.dart';
 import 'package:klinik_giri_husada/models/DaftarModel.dart';
 import 'package:klinik_giri_husada/models/LayananModel.dart';
 import 'package:klinik_giri_husada/models/ModelHourMinute.dart';

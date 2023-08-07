@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:klinik_giri_husada/helpers/FontFamily.dart';
-import 'package:klinik_giri_husada/helpers/OkDialog.dart';
 import 'package:klinik_giri_husada/helpers/colorThemes.dart';
 import 'package:klinik_giri_husada/widgets/AppbarWidget.dart';
 import 'package:klinik_giri_husada/widgets/InputFieldForm.dart';
