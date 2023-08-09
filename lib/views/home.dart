@@ -40,8 +40,25 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  int totalRiwayat() {
+    int myValue = 2;
+    double widthSize = MediaQuery.of(context).size.width;
+    if (widthSize > 567) {
+      myValue = 3;
+    }
+    if (widthSize > 778) {
+      myValue = 4;
+    }
+    if (widthSize > 992) {
+      myValue = 5;
+    }
+    return myValue;
+  }
+
   @override
   Widget build(BuildContext context) {
+    double widthSize = MediaQuery.of(context).size.width;
+
     String time(int index) {
       DateFormat myFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
       DateTime date = myFormat.parse(data[index].daftar_tanggal.toString());
@@ -348,12 +365,15 @@ class _HomePageState extends State<HomePage> {
                         : GridView.count(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 12.h,
-                            crossAxisSpacing: 12.w,
-                            childAspectRatio: 4 / 5.5,
+                            crossAxisCount: totalRiwayat(),
+                            mainAxisSpacing: 6.h,
+                            crossAxisSpacing: 6.w,
+                            childAspectRatio:
+                                widthSize < 568 ? 1 / 1.3 : 1 / 1.1,
                             children: List.generate(
-                              data.length <= 2 ? data.length : 2,
+                              data.length <= totalRiwayat()
+                                  ? data.length
+                                  : totalRiwayat(),
                               (index) {
                                 DaftarResponse kirimData = data[index];
                                 Color bgColor;
@@ -436,6 +456,8 @@ class _HomePageState extends State<HomePage> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20.r)),
                                             child: Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 1.5.w),
                                                 width: 120.w,
                                                 alignment: Alignment.center,
                                                 color: bgColor,

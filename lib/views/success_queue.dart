@@ -160,7 +160,7 @@ class _SuccessQueueState extends State<SuccessQueue> {
                                   isiContain(
                                       'assets/images/sc_tanggal.png',
                                       'Tanggal',
-                                      '${snapshot.data![1].toString()}, ${time()} WIB'),
+                                      '${snapshot.data![1].toString()}, ${time()}'),
                                   // isiContain(
                                   //     'assets/images/sc_antrian.png',
                                   //     'Jumlah Antrian',
@@ -251,9 +251,12 @@ Widget isiContain(String image, String title, String value) {
                     fontColor: AppColors.grey,
                     fontFamily: FontFamily.medium),
                 TextHelper(
-                    text: '$value',
-                    fontSize: 16.sp,
-                    fontFamily: FontFamily.semibold),
+                  text: '$value',
+                  fontSize: 16.sp,
+                  fontFamily: FontFamily.semibold,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           )
