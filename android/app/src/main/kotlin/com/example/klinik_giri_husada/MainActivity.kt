@@ -1,4 +1,4 @@
-package com.example.klinik_giri_husada
+package com.klinik_giri_husada
 
 import io.flutter.embedding.android.FlutterActivity
 

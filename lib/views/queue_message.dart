@@ -343,31 +343,34 @@ class _QueuePageState extends State<QueuePage> {
                                                               .semibold,
                                                         ),
                                                       ),
-                                                      Container(
-                                                        height: 300.h,
-                                                        child:
-                                                            CupertinoDatePicker(
-                                                          initialDateTime:
-                                                              _selectedDate,
-                                                          maximumDate:
-                                                              maximumDate,
-                                                          minimumDate:
-                                                              minimumDate, // Batas maksimum: hari yang sama dengan jam 23:59
-                                                          mode:
-                                                              CupertinoDatePickerMode
-                                                                  .date,
-                                                          onDateTimeChanged:
-                                                              (DateTime
-                                                                  date) async {
-                                                            _pendingDate = date;
+                                                      Expanded(
+                                                        child: Container(
+                                                          // height: 300.h,
+                                                          child:
+                                                              CupertinoDatePicker(
+                                                            initialDateTime:
+                                                                _selectedDate,
+                                                            maximumDate:
+                                                                maximumDate,
+                                                            minimumDate:
+                                                                minimumDate, // Batas maksimum: hari yang sama dengan jam 23:59
+                                                            mode:
+                                                                CupertinoDatePickerMode
+                                                                    .date,
+                                                            onDateTimeChanged:
+                                                                (DateTime
+                                                                    date) async {
+                                                              _pendingDate =
+                                                                  date;
 
-                                                            _pendingDateString =
-                                                                DateFormat(
-                                                                        'EEEE, d MMMM yyyy',
-                                                                        'id_ID')
-                                                                    .format(
-                                                                        date);
-                                                          },
+                                                              _pendingDateString =
+                                                                  DateFormat(
+                                                                          'EEEE, d MMMM yyyy',
+                                                                          'id_ID')
+                                                                      .format(
+                                                                          date);
+                                                            },
+                                                          ),
                                                         ),
                                                       ),
                                                       Container(
